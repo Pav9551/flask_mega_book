@@ -8,6 +8,6 @@ class LoginForm(FlaskForm):
     #photo =  FileField('filename')
     submit = SubmitField('Sign in')
 class AlgebraForm(FlaskForm):
-    answer = StringField('Username', validators=[DataRequired()])
+    answer = StringField('Ответ', validators=[DataRequired()])
     hidden_data = HiddenField('HiddenData')
-    submit = SubmitField('Sign in')
+    submit = SubmitField('Подтвердить')
