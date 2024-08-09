@@ -24,7 +24,7 @@ def generateQuestion():
     num1 = randint(1,10)
     num2 = randint(1,10)
     operations = ["+", "-", "*", "/"]
-    operation = operations[randint(1,3)]
+    operation = operations[randint(0,3)]
     if operation == "/":
         num1 = num1 * num2
     if num2 > num1:
