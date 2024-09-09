@@ -1,0 +1,152 @@
+{% extends "base_zen_garden.html" %}
+{% block title %}template{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block body %}
+{{ super() }}
+{% endblock %}
+{% block preamble %}
+		<div class="preamble" id="environment" role="article">
+			<h3>1. Знакомство с программой Roblox Studio</h3>
+			<p>Перед началом изучения Lua необходимо ознакомиться с основными окнами Roblox Studio.</p>
+			<p>Меню View предназначено для отображения и скрытия окон программы. Основными окнами являются - Explorer, Properties, Toolbox , Object Browser:</p>
+			<p>View->Explorer - отображает все службы из которых состоит игра и содержащиеся в них объекты;</p>
+			<p>View->Properties - отображает все свойства объектов;</p>
+			<p>View->Toolbox - отображает все доступные сторонние ресурсы доступные для игры;</p>
+			<p>View->Object Browser - документация по большенству доступных классов - шаблонов по которым создаются объекты.</p>
+		</div>
+{% endblock %}
+{% block main_supporting %}
+	<div class="main supporting" id="introduction" role="main">
+		<div class="explanation" id="zen-explanation" role="article">
+			<h3>2.1 Знакомство с Lua и скриптами Roblox</h3>
+			<p>Для знакомства с Lua необходимо создать новый объект Script в службе ServerScriptService. Кнопка "+" в окне Explorer справа от службы
+			и добавить строчки кода:</p>
+
+			<pre><code class="lang-js">
+-- создаем экзкмпляр класса "Part" - "часть"
+-- конструктором класса Instance.new,
+-- где Instance - глобальный класс, a
+-- new - метод класса
+-- "Part" - аргумент метода (название класса нового объекта)
+-- local - команда определения локальной переменной,
+-- которой мы присваеваем новый экземпляр класса (объект)
+local part = Instance.new("Part")
+-- Задание размера блока (свойство Size)
+part.Size = Vector3.new(10, 10, 10) -- x,y,z
+-- Задание местоположения блока (свойство Position)
+part.Position = Vector3.new(0, 10, -10) -- x,y,z
+-- Указываем пренадлежность к службе workspace (свойство Parent),
+-- которая отвечает за хранение и отображение объектов
+-- в рабочем пространстве
+part.Parent = game.workspace
+-- game - главный объект нашей игры,
+-- в него входят все службы(подпрограммы)
+			</code></pre>
+	</div>
+	<p>Запустите игру нажав на кнопку "play" - синий треугольник. В рабочем пространстве создастся куб с размером 10х10х10 </p>
+
+		<div class="participation" id="zen-participation" role="article">
+			<h3>2.2 Создание объектов вручную в окне Explorer и редактирование свойств в окне Properties </h3>
+			<p>Для создание нового объекта в игре можно воспользоваться окном Explorer. Нажмите на кнопку "+" около службы workspace и выбирите объект класса Part. Это позволит создать Вам новый объект без скрипта.</p>
+			<p>Если объект выделен, то появляется возможность редактировать его свойства в окне Properties (левая колонка - название свойства, правая - значение свойства). Можно менять его размер, координаты, принадлежность к другим объектам.</p>
+			<p>А так же есть множество других свойств, например имя класса (только для чтения), имя объекта, цвет, форма и т.д. Подробнее о всех доступных свойствах объектов Roblox можно узнать в окне Object Browser (слева - название класса, а справа - свойства (розовые), методы (синие) и события (желтые) доступные данному класу)</p>
+			<p>Смело эксперементируйте со свойствами объекта. Помните, что у каждого свойства свой тип данных:</p>
+		</div>
+
+		<div class="benefits" id="types" role="article">
+			<h3>3. Типы данных Roblox Lua</h3>
+
+		<table>
+		  <tr>
+			<th>Тип данных</th>
+			<th>Описание</th>
+			<th>Пример</th>
+		  </tr>
+		  <tr>
+			<td>nil</td>
+			<td>Отсутствие значения</td>
+			<td>local myVariable = nil</td>
+		  </tr>
+		  <tr>
+			<td>boolean</td>
+			<td>Логическое значение (true или false)</td>
+			<td>local isTrue = true</td>
+		  </tr>
+		  <tr>
+			<td>number</td>
+			<td>Целые и дробные числа</td>
+			<td>local myNumber = 10
+			<br>local myFloat = 3.14</td>
+		  </tr>
+		  <tr>
+			<td>string</td>
+			<td>Строка символов</td>
+			<td>local myString = "Hello, world!"</td>
+		  </tr>
+		  <tr>
+			<td>table</td>
+			<td>Сбор данных, состоящий из ключей и значений</td>
+			<td>local myTable = {
+			  name = "John",
+			  age = 30
+			}</td>
+		  </tr>
+		  <tr>
+			<td>function</td>
+			<td>Блок кода, который можно вызывать</td>
+			<td>local function sayHello()
+			  print("Hello!")
+			end</td>
+		  </tr>
+		  <tr>
+			<td>userdata</td>
+			<td>Специальный тип данных, который используется для работы с C++</td>
+			<td>local myUserdata = Instance.new("Part")</td>
+		  </tr>
+		  <tr>
+			<td>Vector3</td>
+			<td>Представляет точку в 3D пространстве</td>
+			<td>local myVector = Vector3.new(1, 2, 3)</td>
+		  </tr>
+		  <tr>
+			<td>Dictionary</td>
+			<td>Сбор данных, который хранит пары ключ-значение</td>
+			<td>local myDictionary = {
+			  name = "John",
+			  age = 30
+			}</td>
+		  </tr>
+		  <tr>
+			<td>CFrame</td>
+			<td>Представляет положение и ориентацию объекта в 3D пространстве</td>
+			<td>local myCFrame = CFrame.new(1, 2, 3)</td>
+		  </tr>
+		</table>
+
+		</div>
+{% endblock %}
+{% block design_selection %}
+			<div class="design-selection" id="design-selection">
+				<h3 class="select">Оглавление:</h3>
+				<nav role="navigation">
+					<ul>
+											<li>
+						<a href="#environment" class="design-name" >1. Знакомство с программой Roblox Studio</a>
+					</li>					<li>
+						<a href="#introduction" class="designer-name">2. Введение в программирование на Lua</a>
+					</li>					<li>
+						<a href="#types" class="design-name">3. Типы данных в Lua</a>
+					</li>
+					</ul>
+				</nav>
+			</div>
+{% endblock %}
+{% block footer %}
+
+{% endblock %}
+{% block aside %}
+{{ super() }}
+{% endblock %}
+

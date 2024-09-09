@@ -75,5 +75,7 @@ def algebra():
         text, answer = generateQuestion()
         form.hidden_data.data = answer
         return render_template('algebra.html', title='Sign In', form=form, qwestion = text)
-
+@app.route('/python')
+def python_ed():
+    return render_template('page1.html')
 
