@@ -1,0 +1,248 @@
+/*
+THIS STYLESHEET WAS WRITTEN FOR CSS's 20TH ANNIVERSARY.
+
+The "outdated" design features were all intentionally done.
+
+HAPPY BIRTHDAY, CSS! <3
+*/
+
+html {
+  padding-bottom: 20px;
+  cursor: url(http://cur.cursors-4u.net/symbols/sym-7/sym652.ani), url(http://cur.cursors-4u.net/symbols/sym-7/sym652.gif), progress !important;
+}
+
+body {
+  font-family: 'Bubblegum Sans', cursive;
+  width: 800px;
+  margin: auto;
+  padding: 15px;
+  /* original that doesn't exist anymore
+  background-image: url('http://www.animateit.net/data/media/august2009/space_bg.gif');
+  background-image: url('https://64.media.tumblr.com/tumblr_lyholoVeUH1qg95ipo1_500.gif');
+
+  background-image: url('/static/nirvana.jpg')*/
+  background-image: url('/static/v1016-b-09.jpg')
+
+
+}
+
+.preamble, aside, .main {
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 20px;
+  margin: 0px;
+  border-width: 3px;
+  border-color: #ffffff;
+  border-style: dashed;
+}
+
+.main, .preamble {
+  float: right;
+  width: 445px;
+  padding-top: 0px;
+  background-color:
+}
+
+.preamble {
+  padding-bottom: 0px;
+  margin-top: 15px;
+  border-bottom: 0px;
+}
+
+.main {
+  border-top: 0px;
+  background: rgba(200, 200, 200, 0.7);
+}
+
+.summary {
+  font-size: 1.2em;
+  font-family: 'Mogra', cursive;
+  text-align: justify;
+  text-indent: 0%;
+}
+
+.main p, .preamble p {
+  text-indent: 2em;
+  text-align: justify;
+  font-family: 'Rubik', cursive;
+
+}
+
+aside {
+  position: absolute;
+  width: 245px;
+  margin-top: 15px;
+  background-color: rgba(210, 230, 255, 0.7);
+  text-align: center;
+}
+
+header, .summary {
+  color: white;
+  text-align: center;
+}
+
+h1 {
+  font-family: 'Oleo Script Swash Caps', cursive;
+  font-size: 3em;
+  text-shadow: 2px 2px #ff2200;
+  -webkit-animation: mymove 5s infinite;
+  animation: mymove 5s infinite;
+  color: #33FF86;
+  text-align: justify;
+  text-indent: 0%;
+}
+
+@-webkit-keyframes mymove {
+    50% {text-shadow: 10px 20px 30px blue;}
+}
+
+@keyframes mymove {
+    50% {text-shadow: 10px 20px 30px blue;}
+}
+
+h2 {
+  text-align: right;
+  position: relative;
+  overflow-x: -webkit-marquee;
+  animation: marquee 5s linear infinite alternate;
+  font-family: 'Oleo Script Swash Caps', cursive;
+  -webkit-text-stroke: 1px white;
+  color: #E933FF ;
+}
+
+h3 {
+  font-family: 'Rubik', cursive;
+  background: -webkit-linear-gradient(#e04, #333);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+@keyframes marquee {
+  0% { left: 0; }
+  100% { left: -50%; }
+}
+
+ul{
+  list-style: none;
+  padding-left: 0;
+}
+
+li {
+  border-width: 5px;
+  border-style: solid;
+  background: #a1c6ea;
+  border-top-color: #bbd1ea;
+  border-left-color: #bbd1ea;
+  border-right-color: #507dbc;
+  border-bottom-color: #507dbc;
+  padding: 5px;
+  text-align: center;
+}
+
+li a {
+  font-family: 'Capriola', sans-serif;
+  font-size: 0.8em;
+  font-weight: 700;
+}
+
+li:hover {
+  background: #dae3e5;
+}
+
+li:active {
+  background: #dae3e5;
+  border-top-color: #507dbc;
+  border-left-color: #507dbc;
+  border-right-color: #bbd1ea;
+  border-bottom-color: #bbd1ea;
+}
+
+a {
+  color: #34387f;
+  cursor: url(http://cur.cursors-4u.net/symbols/sym-7/sym644.ani), url(http://cur.cursors-4u.net/symbols/sym-7/sym644.gif), progress !important;
+}
+
+.summary a {
+  color: #bbd1ea;
+}
+
+a:hover {
+  color: #507dbc;
+}
+
+.main a {
+  color: #dcccff;
+}
+
+.main a:hover {
+  color: #e07be0;
+}
+
+.main a:visited {
+  color: #420039;
+}
+
+.extra1:after {
+  clear: both;
+  color: white;
+  float: right;
+  text-align: center;
+  padding: 10px;
+  content: "designed by steph :)";
+  width: 445px;
+  font-family: 'Love Ya Like A Sister', cursive;
+  color: hotpink;
+  font-size: 0.8em;
+}
+
+.extra2:after {
+  position: absolute;
+  right: 0.5em;
+  top: 0;
+  color: rgba(255, 255, 255, 0.5);
+  content: 'starry night';
+  font-family: 'Seaweed Script', cursive;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+th {
+  background-color: black;
+  color: white;
+}
+/*
+Fonts:
+
+    font-family: 'Bubblegum Sans', cursive;
+
+    font-family: 'Ruslan Display', cursive;
+
+    font-family: 'Mogra', cursive;
+
+    font-family: 'Oleo Script Swash Caps', cursive;
+
+    font-family: 'Love Ya Like A Sister', cursive;
+
+    font-family: 'Seaweed Script', cursive;
+
+    font-family: 'Frijole', cursive;
+
+    font-family: 'Capriola', sans-serif;
+
+  Cursor from: http://www.cursors-4u.com
+*/

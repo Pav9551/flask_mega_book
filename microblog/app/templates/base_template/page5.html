@@ -1,0 +1,159 @@
+{% extends "base_zen_garden.html" %}
+{% block title %}template{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block body %}
+{{ super() }}
+{% endblock %}
+{% block preamble %}
+		<div class="preamble" id="environment" role="article">
+			<h3>13. Математическая формула спирали. Лестница в небо.</h3>
+			<p>Перед тем, как начать изучение математической формулы спирали, необходимо знать базовую тригонометрию. Взгляните на рисунок 1:</p>
+			<figure>
+			<img src="/static/r_1.jpg" alt="Trulli" style="width:100%">
+  			<figcaption>Рис.1 - Единичная окружность для изучения закономерностей тригонометрических функций.</figcaption>
+			</figure>
+			<p>Если измерить длину окружности с радиусом 1 метр, то длина окружности будет составлять около 6.28 метра или 2 * pi, где pi = 3.14 - константа подтверженная различными методами.</p>
+			<p>Мы можем разметить нашу окружность точками, координаты которых соответствуют частям окружности, например  pi/2, pi/3, pi/4 и т.д</p>
+			<p>Координаты каждой из этих точек можно вычислить через особые тригонометрические функции cos(angle) и sin(angle) из класса math. Где в качестве аргумента функций принимается угол, который выражен через часть длины окружности (например pi/2 это 90 градусов). Принято, что функция cos - это косинус (соответствует координате X), а функция sin - это синус (соответствует координате Y). Эти функции будут нужны нам в программе, благодаря им мы вычислим координаты точек на спирали.</p>
+			<p>Отличие вычисления координат точек спирали от координат точек на окружности в том, что радиус окружности постоянно растет, тем самым раскручивая спираль.</p>
+			<h3>13.1 Лестница в небо.</h3>
+			<p>Для того, чтобы создать спиральную леснтицу в небо, необходимо создать новый объект Script в службе ServerScriptService. Кнопка "+" в окне Explorer справа от службы, поменять имя объекта на Script_stairs (свойство Name) и добавить строчки кода:</p>
+			<pre><code class="lang-js">
+-- Создание папки для хранения объектов спирали
+local partsFolder = Instance.new("Folder")
+partsFolder.Name = "SpiralParts"
+partsFolder.Parent = workspace
+-- Параметры спирали
+local numberOfParts = 50    -- Количество объектов в спирали
+local radiusIncrement = 1   -- Приращение радиуса на каждый виток
+local heightIncrement = 0.5 -- Приращение высоты на каждый виток
+local angleIncrement = math.pi / 8 -- Угол поворота в радианах на каждый объект
+-- Центр спирали
+local center = Vector3.new(0, 0, 0)
+-- Функция для создания объекта 'Part' в заданной позиции
+local function createPart(position, parentFolder, size, color)
+	local part = Instance.new("Part")
+	part.Size = size or Vector3.new(1, 1, 1) -- Задание размера блока
+	part.Anchored = true                     -- Закрепить блок на месте
+	part.Position = position                 -- Установка позиции
+	part.BrickColor = BrickColor.new(color)  -- Задание цвета блока
+	part.Parent = parentFolder               -- Размещение в заданной папке
+	return part
+end
+-- Создаем объекты в форме спирали
+for i = 1, numberOfParts do
+	local radius = i * radiusIncrement
+	local height = i * heightIncrement
+	local angle = i * angleIncrement
+
+	local x = center.X + radius * math.cos(angle)
+	local y = center.Y + height
+	local z = center.Z + radius * math.sin(angle)
+
+	local position = Vector3.new(x, y, z)
+	-- Создание основного объекта
+	createPart(position, partsFolder, Vector3.new(10, 1, 10), "Bright blue")
+end
+			</code></pre>
+		<p>Обратите внимание, что все блоки находятся в папке SpiralParts службы workspace. Их координаты нам еще пригодятся.</p>
+		</div>
+{% endblock %}
+{% block main_supporting %}
+	<div class="main supporting" id="introduction" role="main">
+		<div class="explanation" id="moving" role="article">
+			<h3>14. Векторные операции. Раскладывание монеток по большой спирали.</h3>
+			<p>Математические операции с векторами позволяют более гибко преобразовывать координаты точек. Часто применяется сложение векторов, этот процесс можно представить графически (рисунок 2):</p>
+			<figure>
+			<img src="/static/vector.jpg" alt="Trulli" style="width:100%">
+  			<figcaption>Рис.2 - Графическое представление сложения векторов.</figcaption>
+			</figure>
+			<p>Помимо сложения векторов, Lua позволяет перемножать векторы - тем самым перемножать элементы векторов, которые соответствуют общим осям (x,y,z). </p>
+			<h3>14.1 Раскладывание монеток.</h3>
+			<p>Добавьте модель Collectible Coin из Toolbox на наше рабочее пространство(Workspace) и переместите его в службу ReplicatedStorage меняя свойство Parent:</p>
+			<p>Для того, чтобы расположить монетки по широкой плоской спирали, необходимо добавить строчки кода в Script_stairs:</p>
+			<pre><code class="lang-js">
+-- Создание папки для хранения монеток
+local coinsFolder = Instance.new("Folder")
+coinsFolder.Name = "Coins"
+coinsFolder.Parent = workspace
+local spawns = game.Workspace.SpiralParts
+for _, spwn in pairs(spawns:GetChildren()) do --перебор пар из списка элементов SpiralParts
+	--BasePart - класс родитель для класса Part
+	if spwn:IsA('BasePart') then --является ли этот элемент потомком BasePart?
+		local Coin = game.ReplicatedStorage['Collectible Coin']:Clone()
+		Coin.Parent = coinsFolder -- помещаем его в Workspace (появляется на карте)
+		Coin.Position = spwn.Position * Vector3.new(10,0,10) + Vector3.new(-100,3,-100)
+	end
+end
+			</code></pre>
+		<p>Обратите внимание, что координаты для монеток - это преобразовыванные координаты блоков из папки SpiralParts.</p>
+		</div>
+		<div class="participation" id="zen-participation" role="article">
+			<h3>15. Конструирование с элементами моделирования физики и украшение собственных моделей. Создание модели змеепоезда.</h3>
+			<p>Мы уже изучали элементы моделирования физики в <a href="/page2#zen-participation" >пункте 6.</a> Теперь пришло время познакомиться с шарнирами - BallSocketConstraint.</p>
+			<p>Шарниры - это механические соединения, которые позволяют деталям двигаться относительно друг друга, например: сустав, карданный вал или место крепления фотоаппарата в штативе.</p>
+			<h3>15.1 Создание змеепоезда.</h3>
+			<p>Вначале необходимо создать объект хранения частей змеепоезда. Для этого создадите объект класса Model, нажав кнопку "+" справо от службы workspace. После этого добавьте в Model объект Part c габаритами 20x1x43 и уменьшите его плотность до 0.1 (рисунок 3).</p>
+			<figure>
+			<img src="/static/dencity.jpg" alt="Trulli" style="width:100%">
+  			<figcaption>Рис.3 - Окно properties позволяющие менять физические свойства объекта.</figcaption>
+			</figure>
+			<p>Украсьте его декалью "SNAKE FACE AHH!" из изображений Toolbox. И добавьте рядом с декалью элементы моделирования физики согласно рисунку 4.</p>
+			<figure>
+			<img src="/static/snake.jpg" alt="Trulli" style="width:100%">
+  			<figcaption>Рис.4 - Окно explorer с объектами змеепоезда.</figcaption>
+			</figure>
+			<p>На рисунке видно, что змеепоезд состоит из пяти одинаковых частей соединенных шарнирами через присоединения. И только первая часть имеет объект AlignPosition, который тянет за собой все части змеепоезда.</p>
+			<p>В <a href="/page2#zen-participation" >пункте 6.</a> Подробно описано, как сделать движение платформы. Теперь необходимо соединить платформы между собой с помощью шарниров, настроив необходимые присоединения в объектах BallSocketConstraint (рисунок 5)</p>
+			<figure>
+			<img src="/static/BallSocketConstraint.jpg" alt="Trulli" style="width:100%">
+  			<figcaption>Рис.5 - Окно explorer и properties с объектами BallSocketConstraint.</figcaption>
+			</figure>
+			<p>Чтобы заставить змеепоезд двигаться, необходимо менять свойство AlignPosition с помощью скрипта. Добавьте строчки кода в Script_stairs:</p>
+			<pre><code class="lang-js">
+local spawn_time = 5
+snek_pos = game.Workspace.Model.Part_a
+while true do --до тех пор пока 1==1? - всегда повторяться
+	wait(spawn_time) -- ждём указанное время
+	for _, spwn in pairs(spawns:GetChildren()) do --перебор пар из списка вхождения Spawn
+		if spwn:IsA('BasePart') then --является ли этот элемент потомком BasePart?
+			snek_pos.AlignPosition.Position = spwn.Position * Vector3.new(10,0,10) + Vector3.new(-100,0,-100)
+			task.wait(1.5)
+		end
+	end
+end
+			</code></pre>
+			<p>В данном случае координаты направления движения совпадают с местоположением монет. С помощью скрипта мы можем создать любой маршрут движения змеепоезда</p>
+			<figure>
+			<img src="/static/train.jpg" alt="Trulli" style="width:100%">
+  			<figcaption>Рис.6 - Фрагмент змеепоезда.</figcaption>
+			</figure>
+		</div>
+	</div>
+{% endblock %}
+{% block design_selection %}
+			<div class="design-selection" id="design-selection">
+				<h3 class="select">День пятый:</h3>
+				<nav role="navigation">
+					<ul>
+											<li>
+						<a href="#environment" class="design-name" >13. Математическая формула спирали. Лестница в небо.</a>
+					</li>					<li>
+						<a href="#moving" class="designer-name">14. Векторные операции. Раскладывание монеток.</a>
+					</li>					<li>
+						<a href="#zen-participation" class="design-name">15. Конструирование с элементами моделирования физики и украшение собственных моделей. Создание модели змеепоезда.</a>
+					</li>
+					</ul>
+				</nav>
+			</div>
+
+{% endblock %}
+{% block footer %}
+
+{% endblock %}
+{% block aside %}
+{{ super() }}
+{% endblock %}
+
