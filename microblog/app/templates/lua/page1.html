@@ -1,0 +1,121 @@
+{% extends "lua/base_zen_garden.html" %}
+{% block title %}Занятие по Lua для Roblox{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block body %}
+{{ super() }}
+{% endblock %}
+{% block preamble %}
+		<div class="preamble" id="environment" role="article">
+			<h3>1. Введение в Lua и Roblox</h3>
+			<p>Lua — это легкий и быстрый язык программирования, который используется в платформе Roblox для создания игр и взаимодействия с игровыми объектами. Сегодня мы начнем изучать основы программирования на Lua в контексте Roblox!</p>
+			<p>Первое, что нужно знать, это как работать с Lua в Roblox Studio. Вы будете использовать редактор Roblox Studio, чтобы писать и тестировать свои скрипты.</p>
+		</div>
+{% endblock %}
+{% block main_supporting %}
+	<div class="main supporting" id="introduction" role="main">
+		<div class="explanation" id="zen-explanation" role="article">
+			<h3>2.1 Первые шаги с Lua в Roblox</h3>
+			<p>Начнем с самого простого. В Roblox Lua используется для управления объектами в игре. Например, давайте создадим скрипт, который выведет сообщение, когда игра начинается:</p>
+
+			<pre><code class="lang-lua">
+-- Ваш первый скрипт в Roblox
+print("Добро пожаловать в мой мир Roblox!")
+			</code></pre>
+
+			<p>Этот скрипт выведет сообщение в консоль, когда вы запустите игру в Roblox Studio. Попробуйте его запустить!</p>
+		</div>
+
+		<div class="participation" id="zen-participation" role="article">
+			<h3>2.2 Задание 1: Приветствие игрока</h3>
+			<p>Измените скрипт так, чтобы он приветствовал игрока с его именем. Вы можете использовать встроенную переменную <code>game.Players.LocalPlayer.Name</code> для получения имени игрока:</p>
+
+			<pre><code class="lang-lua">
+-- Приветствие игрока
+local player = game.Players.LocalPlayer
+print("Привет, " .. player.Name .. "!")
+			</code></pre>
+
+			<p>Теперь скрипт будет выводить имя текущего игрока. Попробуйте это в Roblox Studio!</p>
+		</div>
+	</div>
+
+	<div class="main supporting" id="variables" role="main">
+		<div class="participation" id="zen-participation" role="article">
+			<h3>Задание 2: Создание объекта и взаимодействие с ним</h3>
+			<p>В Roblox вы можете создавать и управлять объектами с помощью Lua. Например, давайте создадим часть (блок) в Workspace и изменим его свойства:</p>
+
+			<pre><code class="lang-lua">
+-- Создание части в Workspace
+local part = Instance.new("Part")
+part.Name = "Part"
+part.Size = Vector3.new(4, 1, 2)
+part.Position = Vector3.new(0, 10, 0)
+part.Anchored = true
+part.Parent = game.Workspace
+			</code></pre>
+
+			<p>Этот скрипт создаст блок в мире Roblox с заданными размерами и позицией. Вы также можете изменить его цвет, форму и другие свойства.</p>
+		</div>
+	</div>
+
+	<div class="main supporting" id="loops" role="main">
+		<div class="explanation" id="zen-explanation" role="article">
+			<h3>2.4 Использование циклов в Lua</h3>
+			<p>Циклы позволяют повторять действия в игре несколько раз. Например, вы можете использовать цикл, чтобы двигать объект каждую секунду:</p>
+
+			<pre><code class="lang-lua">
+-- Пример с циклом
+local part = game.Workspace.Part
+
+for i = 1, 10 do
+    part.Position = part.Position + Vector3.new(0, 1, 0)
+    wait(1)  -- Ждем 1 секунду перед следующей итерацией
+end
+			</code></pre>
+
+			<p>Этот код поднимет блок вверх на 10 единиц с паузой в 1 секунду между каждым шагом.</p>
+		</div>
+
+		<div class="participation" id="zen-participation" role="article">
+			<h3>Задание 3: Движение объектов в цикле</h3>
+			<p>Попробуйте изменить цикл так, чтобы объект двигался не только вверх, но и в стороны. Используйте <code>Vector3.new(x, y, z)</code> для управления движением по разным осям:</p>
+
+			<pre><code class="lang-lua">
+-- Движение блока по кругу
+local part = game.Workspace.Part
+
+for i = 1, 10 do
+    part.Position = part.Position + Vector3.new(i, 0, i)
+    wait(1)
+end
+			</code></pre>
+
+			<p>Этот код заставит блок двигаться по диагонали, а вы можете изменить параметры, чтобы задать свое движение!</p>
+		</div>
+	</div>
+{% endblock %}
+
+
+{% block design_selection %}
+	<div class="design-selection" id="design-selection">
+		<h3 class="select">Оглавление:</h3>
+		<nav role="navigation">
+			<ul>
+				<li><a href="#environment" class="design-name">1. Введение в Lua и Roblox</a></li>
+				<li><a href="#introduction" class="designer-name">2. Первые шаги с Lua</a></li>
+				<li><a href="#variables" class="designer-name">3. Создание объектов и их управление</a></li>
+				<li><a href="#loops" class="designer-name">4. Циклы и управление движением</a></li>
+			</ul>
+		</nav>
+	</div>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
+
+{% block aside %}
+{{ super() }}
+{% endblock %}

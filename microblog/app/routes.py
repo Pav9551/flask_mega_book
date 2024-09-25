@@ -77,5 +77,9 @@ def algebra():
         return render_template('algebra.html', title='Sign In', form=form, qwestion = text)
 @app.route('/python')
 def python_ed():
-    return render_template('base_template/page1.html')
+    return render_template('python/page1.html')
+
+@app.route('/lua')
+def lua_ed():
+    return render_template('lua/page1.html')
 
