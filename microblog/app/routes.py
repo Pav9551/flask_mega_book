@@ -82,4 +82,6 @@ def python_ed():
 @app.route('/lua')
 def lua_ed():
     return render_template('lua/page1.html')
-
+@app.route('/ideology')
+def ideology():
+    return render_template('ideology/ideology.html')
