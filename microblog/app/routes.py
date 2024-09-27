@@ -85,3 +85,7 @@ def lua_ed():
 @app.route('/ideology')
 def ideology():
     return render_template('ideology/ideology.html')
+@app.route('/lua_page2')
+def lua_page2():
+    return render_template('lua/page2.html')
+

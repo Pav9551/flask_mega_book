@@ -1,0 +1,93 @@
+{% extends "lua/base_zen_garden.html" %}
+
+{% block title %}Занятие по Lua для Roblox – Урок 2{% endblock %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block body %}
+    {{ super() }}
+{% endblock %}
+
+{% block preamble %}
+<div class="preamble" id="functions" role="article">
+    <h3>3. Введение в Функции Lua</h3>
+    <p>Функции в Lua позволяют вам повторно использовать код и делать его более организованным. В этом уроке мы рассмотрим, как создавать и использовать функции в Roblox.</p>
+</div>
+{% endblock %}
+
+{% block main_supporting %}
+<div class="main supporting" id="functions_overview" role="main">
+    <div class="explanation" id="functions-explanation" role="article">
+        <h3>3.1 Функции в Lua</h3>
+        <p>Функции – это блоки кода, которые выполняют определенную задачу. Вы можете вызывать функцию многократно в разных частях вашей программы. Давайте создадим простую функцию в Lua:</p>
+        <pre><code class="lang-lua">
+-- Function declaration
+function greeting()
+    print("Hello, player!")
+end
+
+-- Function call
+greeting()
+        </code></pre>
+        <p>Эта функция выводит "Hello, player!" в консоль. Вы можете вызывать эту функцию столько раз, сколько нужно.</p>
+    </div>
+
+    <div class="participation" id="functions-participation" role="article">
+        <h3>3.2 Задание 1: Функция с параметром</h3>
+        <p>Давайте изменим функцию, чтобы она принимала параметр – имя игрока:</p>
+        <pre><code class="lang-lua">
+-- Function with a parameter
+function greeting(name)
+    print("Hello, " .. name .. "!")
+end
+
+-- Function call with an argument
+greeting("Alice")
+        </code></pre>
+        <p>Теперь функция будет выводить приветствие с именем игрока. Попробуйте вызвать функцию с разными именами.</p>
+    </div>
+</div>
+
+<div class="main supporting" id="function_usage" role="main">
+    <div class="participation" id="function-usage-participation" role="article">
+        <h3>Задание 2: Функция для создания объектов</h3>
+        <p>Создадим функцию, которая будет создавать объекты в Workspace. Эта функция примет параметры для определения свойств объекта:</p>
+        <pre><code class="lang-lua">
+-- Function to create a part
+function createPart(name, size, position)
+    local part = Instance.new("Part")
+    part.Name = name
+    part.Size = size
+    part.Position = position
+    part.Anchored = true
+    part.Parent = game.Workspace
+end
+
+-- Function call to create different parts
+createPart("Part1", Vector3.new(4, 1, 2), Vector3.new(0, 10, 0))
+createPart("Part2", Vector3.new(2, 2, 2), Vector3.new(5, 15, 5))
+        </code></pre>
+        <p>Эта функция позволяет создать части с разными свойствами, вызывая ее с разными аргументами.</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block design_selection %}
+<div class="design-selection" id="design-selection">
+    <h3 class="select">Оглавление:</h3>
+    <nav role="navigation">
+        <ul>
+            <li><a href="#environment" class="design-name">1. Введение в Lua и Roblox</a></li>
+            <li><a href="#introduction" class="designer-name">2. Первые шаги с Lua</a></li>
+            <li><a href="#variables" class="designer-name">3. Создание объектов и их управление</a></li>
+            <li><a href="#loops" class="designer-name">4. Циклы и управление движением</a></li>
+            <li><a href="#functions" class="designer-name">5. Введение в Функции Lua</a></li>
+        </ul>
+    </nav>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
