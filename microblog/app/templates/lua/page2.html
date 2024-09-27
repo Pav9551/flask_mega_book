@@ -52,24 +52,19 @@ greeting("Alice")
 
 <div class="main supporting" id="function_usage" role="main">
     <div class="participation" id="function-usage-participation" role="article">
-        <h3>Задание 2: Функция для создания объектов</h3>
-        <p>Создадим функцию, которая будет создавать объекты в Workspace. Эта функция примет параметры для определения свойств объекта:</p>
+        <h3>Задание 2: Функция для событий</h3>
+        <p>Создадим функцию, которая будет запускаться по событию прикосновения:</p>
         <pre><code class="lang-lua">
--- Function to create a part
-function createPart(name, size, position)
-    local part = Instance.new("Part")
-    part.Name = name
-    part.Size = size
-    part.Position = position
-    part.Anchored = true
-    part.Parent = game.Workspace
+local function key_touch(player)
+	game.Workspace.Part.Position = Vector3.new(6 + 0, 5.5 + 10, 45 + 0)
+
+	script.Parent:Remove()
+
 end
 
--- Function call to create different parts
-createPart("Part1", Vector3.new(4, 1, 2), Vector3.new(0, 10, 0))
-createPart("Part2", Vector3.new(2, 2, 2), Vector3.new(5, 15, 5))
+script.Parent.Touched:Connect(key_touch)
         </code></pre>
-        <p>Эта функция позволяет создать части с разными свойствами, вызывая ее с разными аргументами.</p>
+        <p>Эта функция позволяет двигать стенку.</p>
     </div>
 </div>
 {% endblock %}
