@@ -1,0 +1,89 @@
+{% extends "python/base_zen_garden.html" %}
+
+{% block title %}Занятие по Python – Урок 2{% endblock %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block body %}
+    {{ super() }}
+{% endblock %}
+
+{% block preamble %}
+<div class="preamble" id="functions" role="article">
+    <h3>3. Введение в функции Python</h3>
+    <p>Функции позволяют вам повторно использовать код и сделать его более организованным. В этом уроке мы рассмотрим, как создавать и использовать функции в Python.</p>
+</div>
+{% endblock %}
+
+{% block main_supporting %}
+<div class="main supporting" id="functions_overview" role="main">
+    <div class="explanation" id="functions-explanation" role="article">
+        <h3>3.1 Функции в Python</h3>
+        <p>Функции – это блоки кода, которые выполняют определенную задачу. Вы можете вызывать функцию многократно в разных частях вашей программы. Давайте создадим простую функцию в Python:</p>
+        <pre><code class="lang-python">
+# Определение функции
+def greeting():
+    print("Привет, игрок!")
+
+# Вызов функции
+greeting()
+        </code></pre>
+        <p>Эта функция выводит сообщение "Привет, игрок!" на экран. Вы можете вызывать эту функцию столько раз, сколько нужно.</p>
+    </div>
+
+    <div class="participation" id="functions-participation" role="article">
+        <h3>3.2 Задание 1: Функция с параметром</h3>
+        <p>Давайте изменим функцию, чтобы она принимала параметр – имя игрока:</p>
+        <pre><code class="lang-python">
+# Функция с параметром
+def greeting(name):
+    print(f"Привет, {name}!")
+
+# Вызов функции с аргументом
+greeting("Алиса")
+        </code></pre>
+        <p>Теперь функция будет выводить приветствие с именем игрока. Попробуйте вызвать функцию с разными именами.</p>
+    </div>
+</div>
+
+<div class="main supporting" id="function_usage" role="main">
+    <div class="participation" id="function-usage-participation" role="article">
+        <h3>Задание 2: Функция для расчета</h3>
+        <p>Создадим функцию, которая будет принимать два числа и возвращать их сумму:</p>
+        <pre><code class="lang-python">
+# Функция для расчета суммы
+def add_numbers(a, b):
+    return a + b
+
+# Вызов функции с аргументами
+result = add_numbers(3, 5)
+print(result)
+        </code></pre>
+        <p>Эта функция принимает два числа и возвращает их сумму. Попробуйте вызвать эту функцию с разными числами.</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block design_selection %}
+<div class="design-selection" id="design-selection">
+    <h3 class="select">Оглавление:</h3>
+    <nav role="navigation">
+        <ul>
+            <li><a href="#environment" class="design-name">1. Введение в Python</a></li>
+            <li><a href="#introduction" class="designer-name">2. Первые шаги с Python</a></li>
+            <li><a href="#variables" class="designer-name">3. Знакомство с ветвлениями</a></li>
+            <li><a href="#loops" class="designer-name">4. Циклы</a></li>
+            <li><a href="#functions" class="designer-name">5. Введение в функции Python</a></li>
+        </ul>
+    </nav>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block aside %}
+    {{ super() }}
+{% endblock %}

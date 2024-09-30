@@ -78,7 +78,9 @@ def algebra():
 @app.route('/python')
 def python_ed():
     return render_template('python/page1.html')
-
+@app.route('/python_page2')
+def python_page2():
+    return render_template('python/page2.html')
 @app.route('/lua')
 def lua_ed():
     return render_template('lua/page1.html')
