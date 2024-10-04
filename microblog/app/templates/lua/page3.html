@@ -1,0 +1,182 @@
+{% extends "lua/base_zen_garden.html" %}
+{% block title %}template{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block body %}
+{{ super() }}
+{% endblock %}
+{% block preamble %}
+		<div class="preamble" id="environment" role="article">
+			<h3>5. Делаем платформу двигающуюся по маршруту</h3>
+			<p>Для того чтобы объект двигался необходимо знать некоторые вспомогательные объекты:</p>
+			<p>AlignPosition(Выравнивание позиции) - это компонент, который позволяет выравнивать позицию одного объекта (дочернего) относительно другого (родительского), тем самым создает движение объекта;</p>
+			<p>AlignOrienation(Выравнивание ориентации) - это компонент, который позволяет выравнивать ориентацию (поворот) одного объекта (дочернего) относительно другого (родительского), тем самым стабилизирует положение объекта и не дает ему перевернуться;</p>
+			<p>Аttachment(Присоединение) - наличие этого объекта, есть необходимое требование для работы AlignPosition и AlignOrienation.</p>
+			<p>Применение этих объектов позволяет нам создать двигающуюся платформу на базе объекта класса Part.</p>
+            <h3>Таблица 1. Align Position Properties</h3>
+		<table>
+		  <tr>
+			<th>Свойство</th>
+			<th>Значение</th>
+			<th>Примечание</th>
+		  </tr>
+		  <tr>
+			<td>Mode</td>
+			<td>OneAttachment</td>
+			<td>В режиме одного присоединения</td>
+		  </tr>
+		  <tr>
+			<td>Attachment0</td>
+			<td>attachment</td>
+			<td>ссылаемся на данное присоединение</td>
+		  </tr>
+		  <tr>
+			<td>MaxVelocity</td>
+			<td>15</td>
+			<td>Скорость</td>
+		  </tr>
+		  <tr>
+			<td>MaxForce</td>
+			<td>10000000</td>
+			<td>Сила</td>
+		  </tr>
+		</table>
+		<h3>Таблица 2. Align Orientation Properties</h3>
+		<table>
+		  <tr>
+			<th>Свойство</th>
+			<th>Значение</th>
+			<th>Примечание</th>
+		  </tr>
+		  <tr>
+			<td>Mode</td>
+			<td>OneAttachment</td>
+			<td>В режиме одного присоединения</td>
+		  </tr>
+		  <tr>
+			<td>Attachment0</td>
+			<td>attachment</td>
+			<td>ссылаемся на данное присоединение</td>
+		  </tr>
+		  <tr>
+			<td>MaxTorque</td>
+			<td>10000000</td>
+			<td>Крутящий момент</td>
+		  </tr>
+		</table>
+			<h3>Чтобы нам не настраивать объекты вручную каждый раз, мы можем применять код.</h3>
+		</div>
+{% endblock %}
+{% block main_supporting %}
+	<div class="main supporting" id="introduction" role="main">
+		<div class="explanation" id="moving" role="article">
+			<h3>6 Создание движущейся платформы</h3>
+			<p>Для того, чтобы создать необходимые объекты внутри Part, необходимо создать новый объект Script внутри Part. Кнопка "+" в окне Explorer справа от Part, поменять имя объекта на Script_move (свойство Name)
+			и добавить строчки кода:</p>
+
+			<pre><code class="lang-js">
+local part = script.Parent
+
+local attachment = Instance.new("Attachment", part)
+
+local alignPosition = Instance.new("AlignPosition", part)
+--Enum - это стандартный тип, который предоставляет множество предустановленных перечислений
+alignPosition.Mode = Enum.PositionAlignmentMode.OneAttachment
+--ссылка на присоединение
+alignPosition.Attachment0 = attachment
+--скорость
+alignPosition.MaxVelocity = 15
+--сила
+alignPosition.MaxForce = 10000000
+
+local alignOrienation = Instance.new("AlignOrientation", part)
+--Enum - для лучшей читабельности
+alignOrienation.Mode = Enum.OrientationAlignmentMode.OneAttachment
+--ссылка на присоединение
+alignOrienation.Attachment0 = attachment
+--сила стабилизации
+alignOrienation.MaxTorque = 10000000
+
+--здесь будет код, который задает движение объекта
+
+			</code></pre>
+
+	</div>
+	<p>Запустите игру, платформа никуда не поедет, но в окне Explorer, внутри Part будут созданы необходмые объекты.</p>
+
+		<div class="participation" id="zen-participation1" role="article">
+			<h3>7 Приводим платформу в движение</h3>
+            <p>7.1 Перемещаем объект в новую точку</p>
+			<pre><code class="lang-js">
+--здесь будет код, который задает движение объекта
+alignPosition.Position = part.Position + Vector3.new(0, 5, 0)
+wait(1)
+			</code></pre>
+
+		</div>
+        <div class="participation" id="zen-participation2" role="article">
+            <p>7.2 Перемещаем объект по двум точкам</p>
+			<pre><code class="lang-js">
+--здесь будет код, который задает движение объекта
+alignPosition.Position = part.Position + Vector3.new(0, 5, 0)
+wait(1)
+alignPosition.Position = part.Position + Vector3.new(0, 10, 0)
+wait(1)
+			</code></pre>
+
+		</div>
+        <div class="participation" id="zen-participation3" role="article">
+
+            <p>7.3 Перемещаем объект по трем точкам</p>
+			<pre><code class="lang-js">
+--здесь будет код, который задает движение объекта
+alignPosition.Position = part.Position + Vector3.new(0, 5, 0)
+wait(1)
+alignPosition.Position = part.Position + Vector3.new(0, 10, 0)
+wait(1)
+alignPosition.Position = part.Position + Vector3.new(0, -15, 0)
+wait(1)
+			</code></pre>
+
+		</div>
+        <div class="participation" id="zen-participation4" role="article">
+
+            <p>7.4 Зацикливаем программу</p>
+			<pre><code class="lang-js">
+--здесь будет код, который задает движение объекта
+while true do
+	alignPosition.Position = part.Position + Vector3.new(0, 5, 0)
+	wait(1)
+	alignPosition.Position = part.Position + Vector3.new(0, 10, 0)
+	wait(1)
+	alignPosition.Position = part.Position + Vector3.new(0, -15, 0)
+	wait(1)
+end
+			</code></pre>
+<p>Напишите код, чтобы платформа переместила Вас на другую локацию</p>
+		</div>
+{% endblock %}
+{% block design_selection %}
+			<div class="design-selection" id="design-selection">
+				<h3 class="select">День второй:</h3>
+				<nav role="navigation">
+					<ul>
+											<li>
+						<a href="#environment" class="design-name" >4. Объекты моделирования физики</a>
+					</li>					<li>
+						<a href="#moving" class="designer-name">5. Создание движущейся платформы</a>
+					</li>					<li>
+						<a href="#zen-participation" class="design-name">6 Создание объектов AlignPosition, AlignOrientation и Attachment вручную</a>
+					</li>
+					</ul>
+				</nav>
+			</div>
+
+{% endblock %}
+{% block footer %}
+
+{% endblock %}
+{% block aside %}
+{{ super() }}
+{% endblock %}
