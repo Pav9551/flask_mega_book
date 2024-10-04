@@ -83,12 +83,31 @@ end
 			<p>Попробуйте изменить цикл так, чтобы объект двигался не только вверх, но и в стороны. Используйте <code>Vector3.new(x, y, z)</code> для управления движением по разным осям:</p>
 
 			<pre><code class="lang-lua">
--- Движение блока по кругу
-local part = game.Workspace.Part
+--здесь будет код, который задает движение объекта
+local radius = 50 -- радиус круга
+local speed = 0.05 -- скорость движения (измеряется в радианах)
 
-for i = 1, 10 do
-    part.Position = part.Position + Vector3.new(i, 0, i)
-    wait(1)
+local angle = 0 -- начальный угол
+local origin = alignPosition.Position
+while true do
+	-- Рассчитываем новые координаты
+
+	local x = origin.x + radius * math.cos(angle)
+	local z = origin.z + radius * math.sin(angle)
+
+	-- Обновляем позицию объекта
+	alignPosition.Position = Vector3.new(x, origin.y, z)
+
+	-- Увеличиваем угол для следующей итерации
+	angle = angle + speed
+
+	-- Ждем некоторое время перед следующей итерацией цикла
+	wait(0.1) -- Меняем интервал времени в зависимости от нужной плавности и скорости движения
+
+	-- Проверка на увеличение angle больше 2*pi для возможного сброса или модификации
+	if angle > 2 * math.pi then
+		angle = angle - 2 * math.pi -- Сбрасываем угол после полного оборота
+	end
 end
 			</code></pre>
 
