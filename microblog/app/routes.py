@@ -84,6 +84,9 @@ def python_page2():
 @app.route('/python_page3')
 def python_page3():
     return render_template('python/page3.html')
+@app.route('/python_page4')
+def python_page4():
+    return render_template('python/page4.html')
 @app.route('/lua')
 def lua_ed():
     return render_template('lua/page1.html')
