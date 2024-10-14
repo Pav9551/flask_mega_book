@@ -99,4 +99,6 @@ def lua_page2():
 @app.route('/lua_page3')
 def lua_page3():
     return render_template('lua/page3.html')
-
+@app.route('/lua_page4')
+def lua_page4():
+    return render_template('lua/page4.html')
