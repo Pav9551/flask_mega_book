@@ -1,0 +1,124 @@
+{% extends "python/base_zen_garden.html" %}
+
+{% block title %}
+Занятие по Python – Взаимодействие с Minecraft: установка блоков из файла
+{% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+{% endblock %}
+
+{% block preamble %}
+<div class="preamble" id="minecraft_interaction" role="article">
+    <h3>1. Взаимодействие с Minecraft для установки блоков по данным из файла</h3>
+    <p>Сегодня мы научимся использовать Python для взаимодействия с Minecraft, будем загружать карту из файла и устанавливать блоки в игровом мире. Это открывает возможности для автоматизации и творчества в игре, делая процесс установки блоков быстрее и интереснее.</p>
+</div>
+{% endblock %}
+
+{% block main_supporting %}
+<div class="main supporting" id="function_description" role="main">
+    <div class="explanation" id="function-explanation" role="article">
+        <h3>2.1 Описание функций для работы с картами</h3>
+        <p>Используются функции для загрузки карт из текстового файла и установки блоков в игровом мире Minecraft. Функция <code>place_blocks</code> ставит блоки в зависимости от предоставленных данных карты.</p>
+    </div>
+    <div class="participation" id="function-setup" role="article">
+        <h3>2.2 Настройка функции установки блоков</h3>
+        <p>Функция <code>place_blocks</code> принимает объект Minecraft и данные карты, затем помещает блоки в указанные координаты.</p>
+        <pre><code class="lang-python">
+from mcpi.minecraft import Minecraft
+from mcpi import block
+
+def load_maps_from_file(filename):
+    maps = []
+    current_map = []
+    with open(filename, 'r', encoding='utf-8') as file:
+        for line in file:
+            line = line.strip()
+            if len(line) == 0 and current_map:
+                maps.append(current_map)
+                current_map = []
+            elif line:
+                current_map.append(line)
+        if current_map:
+            maps.append(current_map)
+    return maps
+
+def place_blocks(mc, map_data, start_x, start_y, start_z):
+    """
+    Устанавливает блоки в Minecraft на основе карты.
+    :param mc: объект Minecraft для взаимодействия с игрой
+    :param map_data: список строк, каждая строка включает пробел-разделённые коды блоков
+    :param start_x, start_y, start_z: начальные координаты для установки блоков
+    """
+    for y, line in enumerate(map_data):
+        for x, code in enumerate(line.split()):
+            try:
+                block_id = int(code, 16)  # Преобразуем код в целое число
+                mc.setBlock(start_x + x, start_y - y, start_z, block_id)
+            except ValueError:
+                print(f"Неверный ID блока: {code}")
+
+def main():
+    # Подключаемся к Minecraft
+    mc = Minecraft.create()
+    # Создаем простую карту с кодами блоков
+    map_data = [
+        "1 1 1 1 1",
+        "1 0 0 0 1",
+        "1 0 4 0 1",
+        "1 0 0 0 1",
+        "1 1 1 1 1"
+    ]
+    # Указываем начальные координаты в мире Minecraft
+    position = mc.player.getTilePos()
+    start_x = position.x
+    start_y = position.y + 3
+    start_z = position.z
+    # Ставим блоки согласно карте
+    place_blocks(mc, map_data, start_x, start_y, start_z)
+
+if __name__ == "__main__":
+    main()
+        </code></pre>
+    </div>
+</div>
+
+<div class="main supporting" id="execution_logic" role="main">
+    <div class="participation" id="execution-example" role="article">
+        <h3>Задание 1: Основная логика выполнения</h3>
+        <p>Запуск программы инициирует связь с миром Minecraft и автоматическое размещение блоков по загруженной карте, предоставляя наглядное представление о том, как данные преобразуются в элементы игры.</p>
+    </div>
+</div>
+
+<div class="main supporting" id="expansion" role="main">
+    <div class="explanation" id="expansion-explanation" role="article">
+        <h3>3. Возможности расширения</h3>
+        <p>Попробуйте усовершенствовать код, добавив возможность сохранять и загружать более сложные структуры, создавать пользовательские блоки и интегрировать дополнительные функции взаимодействия с Minecraft.</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block design_selection %}
+<div class="design-selection" id="design-selection">
+    <h3 class="select">Оглавление:</h3>
+    <nav role="navigation">
+        <ul>
+            <li><a href="#minecraft_interaction" class="design-name">1. Взаимодействие с Minecraft</a></li>
+            <li><a href="#function_description" class="designer-name">2. Описание функций</a></li>
+            <li><a href="#execution_logic" class="designer-name">3. Основная логика выполнения</a></li>
+            <li><a href="#expansion" class="designer-name">4. Возможности расширения</a></li>
+        </ul>
+    </nav>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block aside %}
+{{ super() }}
+{% endblock %}

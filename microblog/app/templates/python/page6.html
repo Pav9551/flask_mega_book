@@ -1,0 +1,106 @@
+{% extends "python/base_zen_garden.html" %}
+
+{% block title %}
+Занятие по Python – Загрузка и вывод карт из файла
+{% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+{% endblock %}
+
+{% block preamble %}
+<div class="preamble" id="map_loading" role="article">
+    <h3>1. Загрузка и вывод карт из файла</h3>
+    <p>Сегодня мы создадим программу на Python, которая загружает карты из текстового файла и выводит их. Это полезно для отображения данных в консольном приложении в структурированном виде, например, для игрового процесса или визуализации данных.</p>
+</div>
+{% endblock %}
+
+{% block main_supporting %}
+<div class="main supporting" id="function_description" role="main">
+    <div class="explanation" id="function-explanation" role="article">
+        <h3>2.1 Описание функции загрузки карт</h3>
+        <p>Функция <code>load_maps_from_file</code> считывает текстовый файл и разбивает его содержание на отдельные карты, где каждая карта отделена пустой строкой. Карта представляется списком строк.</p>
+    </div>
+    <div class="participation" id="function-setup" role="article">
+        <h3>2.2 Настройка функции</h3>
+        <p>Функция <code>print_map</code> выводит карту, принимая список строк, содержащих разделенные пробелами значения.</p>
+        <pre><code class="lang-python">
+def load_maps_from_file(filename):
+    maps = []
+    current_map = []
+    with open(filename, 'r', encoding='utf-8') as file:
+        for line in file:
+            line = line.strip()  # Удаляем пробелы и символ новой строки
+            if len(line) == 0 and current_map:
+                maps.append(current_map)
+                current_map = []
+            elif line:
+                current_map.append(line)
+        if current_map:
+            maps.append(current_map)
+    return maps
+
+def print_map(unicode_map):
+    for line in unicode_map:
+        for code in line.split():
+            print(code, end=' ')
+        print()  # Новая строка после каждой строки карты
+
+def main():
+    filename = 'maps_unicode.txt'
+    try:
+        maps = load_maps_from_file(filename)
+        for i, map_ in enumerate(maps):
+            print(f"Map {i + 1}:")
+            print_map(map_)
+            print()
+    except FileNotFoundError:
+        print(f"Файл {filename} не найден.")
+    except ValueError as e:
+        print(e)
+
+if __name__ == "__main__":
+    main()
+        </code></pre>
+    </div>
+</div>
+
+<div class="main supporting" id="execution_logic" role="main">
+    <div class="participation" id="execution-example" role="article">
+        <h3>Задание 1: Основная логика выполнения</h3>
+        <p>Основная функция <code>main</code> инициирует загрузку карт из файла, а затем каждая карта отображается в консоли. Это полезно для визуального представления структуры данных.</p>
+    </div>
+</div>
+
+<div class="main supporting" id="expansion" role="main">
+    <div class="explanation" id="expansion-explanation" role="article">
+        <h3>3. Расширение функций</h3>
+        <p>Вы можете дополнить функциональность, добавляя адреса карт, увеличивая сложность карт или интегрируя другие источники данных для загрузки.</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block design_selection %}
+<div class="design-selection" id="design-selection">
+    <h3 class="select">Оглавление:</h3>
+    <nav role="navigation">
+        <ul>
+            <li><a href="#map_loading" class="design-name">1. Загрузка и вывод карт из файла</a></li>
+            <li><a href="#function_description" class="designer-name">2. Описание функции загрузки карт</a></li>
+            <li><a href="#execution_logic" class="designer-name">3. Основная логика выполнения</a></li>
+            <li><a href="#expansion" class="designer-name">4. Расширение функций</a></li>
+        </ul>
+    </nav>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block aside %}
+{{ super() }}
+{% endblock %}
