@@ -23,30 +23,42 @@
 <div class="main supporting" id="function_description" role="main">
     <div class="explanation" id="function-explanation" role="article">
         <h3>2.1 Описание функций для работы с картами</h3>
-        <p>Используются функции для загрузки карт из текстового файла и установки блоков в игровом мире Minecraft. Функция <code>place_blocks</code> ставит блоки в зависимости от предоставленных данных карты.</p>
+        <p>Мы будем использовать Python для загрузки карт из текстового файла и установки блоков в Minecraft. Это позволит вам автоматизировать процесс строительства в игре.</p>
     </div>
     <div class="participation" id="function-setup" role="article">
-        <h3>2.2 Настройка функции установки блоков</h3>
-        <p>Функция <code>place_blocks</code> принимает объект Minecraft и данные карты, затем помещает блоки в указанные координаты.</p>
+        <h3>Шаг 1: Импорт необходимых модулей</h3>
+        <p>Для начала, нам нужно импортировать модули, которые позволят нам взаимодействовать с Minecraft.</p>
         <pre><code class="lang-python">
 from mcpi.minecraft import Minecraft
 from mcpi import block
-
+        </code></pre>
+        <p>Эти модули предоставляют функции для подключения к Minecraft и управления блоками в игре.</p>
+    </div>
+    <div class="participation" id="function-setup" role="article">
+        <h3>Шаг 2: Создание функции загрузки карт</h3>
+        <p>Эта функция загружает карты из текстового файла. Каждая карта представлена списком строк, где строки содержат коды блоков, разделенные пробелами.</p>
+        <pre><code class="lang-python">
 def load_maps_from_file(filename):
-    maps = []
-    current_map = []
+    maps = []  # Список для хранения всех карт
+    current_map = []  # Временный список для текущей карты
     with open(filename, 'r', encoding='utf-8') as file:
         for line in file:
-            line = line.strip()
+            line = line.strip()  # Удаляем пробелы и символ новой строки
             if len(line) == 0 and current_map:
-                maps.append(current_map)
-                current_map = []
+                maps.append(current_map)  # Добавляем текущую карту в список карт
+                current_map = []  # Очищаем временный список для следующей карты
             elif line:
-                current_map.append(line)
+                current_map.append(line)  # Добавляем строку в текущую карту
         if current_map:
-            maps.append(current_map)
+            maps.append(current_map)  # Добавляем последнюю карту, если файл не заканчивается пустой строкой
     return maps
-
+        </code></pre>
+        <p>Эта функция возвращает список карт, каждая из которых может быть использована для установки блоков в Minecraft.</p>
+    </div>
+    <div class="participation" id="function-setup" role="article">
+        <h3>Шаг 3: Создание функции установки блоков</h3>
+        <p>Эта функция принимает объект Minecraft и данные карты, затем помещает блоки в указанные координаты.</p>
+        <pre><code class="lang-python">
 def place_blocks(mc, map_data, start_x, start_y, start_z):
     """
     Устанавливает блоки в Minecraft на основе карты.
@@ -61,18 +73,19 @@ def place_blocks(mc, map_data, start_x, start_y, start_z):
                 mc.setBlock(start_x + x, start_y - y, start_z, block_id)
             except ValueError:
                 print(f"Неверный ID блока: {code}")
-
+        </code></pre>
+        <p>Эта функция проходит по каждой строке карты и устанавливает блоки в Minecraft, начиная с заданных координат.</p>
+    </div>
+    <div class="participation" id="function-setup" role="article">
+        <h3>Шаг 4: Основная функция</h3>
+        <p>Эта функция подключается к Minecraft, загружает карту и размещает блоки в игровом мире.</p>
+        <pre><code class="lang-python">
 def main():
     # Подключаемся к Minecraft
     mc = Minecraft.create()
-    # Создаем простую карту с кодами блоков
-    map_data = [
-        "1 1 1 1 1",
-        "1 0 0 0 1",
-        "1 0 4 0 1",
-        "1 0 0 0 1",
-        "1 1 1 1 1"
-    ]
+    # Загружаем карту из файла
+    filename = 'minecraft_map.txt'
+    map_data = load_maps_from_file(filename)[0]  # Загружаем первую карту из файла
     # Указываем начальные координаты в мире Minecraft
     position = mc.player.getTilePos()
     start_x = position.x
@@ -84,6 +97,22 @@ def main():
 if __name__ == "__main__":
     main()
         </code></pre>
+        <p>Эта функция выполняет все необходимые шаги для установки блоков в Minecraft, начиная с загрузки карты и заканчивая размещением блоков.</p>
+    </div>
+</div>
+
+<div class="main supporting" id="example_file" role="main">
+    <div class="explanation" id="example-file-explanation" role="article">
+        <h3>Пример файла с картой</h3>
+        <p>Файл <code>minecraft_map.txt</code> содержит карты, представленные с помощью кодов блоков. Каждая карта отделена пустой строкой. Вот пример содержимого файла:</p>
+        <pre><code class="lang-text">
+1 1 1 1 1
+1 0 0 0 1
+1 0 4 0 1
+1 0 0 0 1
+1 1 1 1 1
+        </code></pre>
+        <p>Этот файл используется для загрузки и отображения карт в вашей программе. Убедитесь, что файл сохранен в той же директории, где находится ваш скрипт Python, или укажите полный путь к файлу в переменной <code>filename</code> в функции <code>main</code>.</p>
     </div>
 </div>
 
@@ -109,8 +138,9 @@ if __name__ == "__main__":
         <ul>
             <li><a href="#minecraft_interaction" class="design-name">1. Взаимодействие с Minecraft</a></li>
             <li><a href="#function_description" class="designer-name">2. Описание функций</a></li>
-            <li><a href="#execution_logic" class="designer-name">3. Основная логика выполнения</a></li>
-            <li><a href="#expansion" class="designer-name">4. Возможности расширения</a></li>
+            <li><a href="#example_file" class="designer-name">3. Пример файла с картой</a></li>
+            <li><a href="#execution_logic" class="designer-name">4. Основная логика выполнения</a></li>
+            <li><a href="#expansion" class="designer-name">5. Возможности расширения</a></li>
         </ul>
     </nav>
 </div>
