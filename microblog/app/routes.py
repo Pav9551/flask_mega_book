@@ -99,6 +99,9 @@ def python_page7():
 @app.route('/python_page8')
 def python_page8():
     return render_template('python/page8.html')
+@app.route('/python_page9')
+def python_page9():
+    return render_template('python/page9.html')
 @app.route('/lua')
 def lua_ed():
     return render_template('lua/page1.html')
