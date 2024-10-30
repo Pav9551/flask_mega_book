@@ -120,3 +120,13 @@ def lua_page4():
 @app.route('/lua_page5')
 def lua_page5():
     return render_template('lua/page5.html')
+
+@app.route('/scratch')
+def scratch_ed():
+    return render_template('scratch/page1.html')
+@app.route('/scratch_page2')
+def scratch_page2():
+    return render_template('scratch/page2.html')
+@app.route('/scratch_page3')
+def scratch_page3():
+    return render_template('scratch/page3.html')

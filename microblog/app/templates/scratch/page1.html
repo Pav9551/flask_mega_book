@@ -1,0 +1,129 @@
+{% extends "scratch/base_zen_garden.html" %}
+{% block title %}Scratch Programming Lesson{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block body %}
+{{ super() }}
+{% endblock %}
+{% block preamble %}
+<div class="preamble" id="environment" role="article">
+<h3>1. Introduction to Scratch</h3>
+<p>Scratch is a visual programming language that makes it easy to create interactive stories, games, and animations. In this lesson, we'll explore the basics of Scratch programming!</p>
+<p>You'll use the Scratch editor to build and test your projects.</p>
+</div>
+{% endblock %}
+{% block main_supporting %}
+<div class="main supporting" id="introduction" role="main">
+<div class="explanation" id="zen-explanation" role="article">
+<h3>2.1 Getting Started with Scratch</h3>
+<p>Let's start with a simple script. We'll create a script that moves a sprite in a circular motion when the space key is pressed:</p>
+<pre><code class="lang-scratch">
+- **When I receive [start]**
+  - Show
+  - Point in direction (90)
+  - Go to x: (-187) y: (-70)
+  - Forever
+    - If &lt;key [space] pressed?&gt; then
+      - Repeat (18)
+        - Turn (20) degrees
+        - Change y by (10)
+      - Repeat (18)
+        - Turn (20) degrees
+        - Change y by (-10)
+</code></pre>
+<p>This script will make the sprite move in a circular pattern when you press the space key. Try it out in the Scratch editor!</p>
+</div>
+<div class="participation" id="zen-participation" role="article">
+<h3>2.2 Task 1: Customize the Movement</h3>
+<p>Modify the script to change the movement speed or direction. You can adjust the values in the "Turn" and "Change y by" blocks to see different effects:</p>
+<pre><code class="lang-scratch">
+- **When I receive [start]**
+  - Show
+  - Point in direction (90)
+  - Go to x: (-187) y: (-70)
+  - Forever
+    - If &lt;key [space] pressed?&gt; then
+      - Repeat (18)
+        - Turn (15) degrees
+        - Change y by (15)
+      - Repeat (18)
+        - Turn (15) degrees
+        - Change y by (-15)
+</code></pre>
+<p>Experiment with different values to see how the sprite's movement changes!</p>
+</div>
+</div>
+<div class="main supporting" id="variables" role="main">
+<div class="participation" id="zen-participation" role="article">
+<h3>Task 2: Add a Variable</h3>
+<p>In Scratch, you can use variables to store and manipulate data. Let's create a variable to count how many times the sprite moves:</p>
+<pre><code class="lang-scratch">
+- **When I receive [start]**
+  - Set [moveCount v] to (0)
+  - Show
+  - Go to x: (-187) y: (-70)
+  - Forever
+    - If &lt;key [space] pressed?&gt; then
+      - Change y by (10)
+      - Wait (0.1) seconds
+      - Change y by (-10)
+      - Wait (0.1) seconds
+      - Change [moveCount v] by (1)
+</code></pre>
+<p>This script will increase the move count each time the sprite moves. Display the variable to see it in action!</p>
+</div>
+</div>
+<div class="main supporting" id="loops" role="main">
+<div class="explanation" id="zen-explanation" role="article">
+<h3>2.4 Using Loops in Scratch</h3>
+<p>Loops allow you to repeat actions multiple times. Let's use a loop to make the sprite move in a pattern:</p>
+<pre><code class="lang-scratch">
+- **When I receive [start]**
+  - Show
+  - Go to x: (-187) y: (-70)
+  - Repeat (10)
+    - Change y by (10)
+    - Wait (0.1) seconds
+    - Change y by (-10)
+    - Wait (0.1) seconds
+</code></pre>
+<p>This code will make the sprite move up and down 10 times. Try modifying the repeat count to see different patterns!</p>
+</div>
+</div>
+<div class="main supporting" id="collision" role="main">
+<div class="explanation" id="zen-explanation" role="article">
+<h3>2.5 Handling Collisions</h3>
+<p>Let's add a script to handle collisions. If the sprite touches a specific object, it will hide and stop the program:</p>
+<pre><code class="lang-scratch">
+- **When I receive [start]**
+  - Forever
+    - If &lt;touching [edge] ?&gt; then
+      - Broadcast [end]
+      - Hide
+      - Hide variable [moveCount v]
+      - Broadcast [end]
+</code></pre>
+<p>This script will hide the sprite and stop the program when it touches the edge. Try it out!</p>
+</div>
+</div>
+{% endblock %}
+{% block design_selection %}
+<div class="design-selection" id="design-selection">
+<h3 class="select">Table of Contents:</h3>
+<nav role="navigation">
+<ul>
+<li><a href="#environment" class="design-name">1. Introduction to Scratch</a></li>
+<li><a href="#introduction" class="designer-name">2. Getting Started with Scratch</a></li>
+<li><a href="#variables" class="designer-name">3. Using Variables</a></li>
+<li><a href="#loops" class="designer-name">4. Using Loops</a></li>
+<li><a href="#collision" class="designer-name">5. Handling Collisions</a></li>
+</ul>
+</nav>
+</div>
+{% endblock %}
+{% block footer %}
+{% endblock %}
+{% block aside %}
+{{ super() }}
+{% endblock %}

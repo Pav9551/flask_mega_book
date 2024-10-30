@@ -1,0 +1,88 @@
+{% extends "scratch/base_zen_garden.html" %}
+
+{% block title %}Scratch Custom Block Lesson{% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+{% endblock %}
+
+{% block preamble %}
+<div class="preamble" id="custom-block" role="article">
+  <h3>1. Custom Block Definition</h3>
+  <p>In this lesson, we'll define a custom block in Scratch and explore how it can be used in different scripts.</p>
+</div>
+{% endblock %}
+
+{% block main_supporting %}
+<div class="main supporting" id="custom-block-definition" role="main">
+  <div class="explanation" id="zen-explanation" role="article">
+    <h3>2. Custom Block Definition</h3>
+    <pre><code class="lang-scratch">
+- **Define [block]**
+  - Show
+  - Go to x: (7) y: (29)
+  - Set effect [brightness] to (10)
+  - Forever
+    - If &lt;touching [mouse-pointer]?&gt; then
+      - Change effect [brightness] by (-15)
+      - Wait until &lt;not &lt;touching [mouse-pointer]?&gt;&gt;
+      - Change effect [brightness] by (15)
+    </code></pre>
+    <p>This custom block will make the sprite react to the mouse pointer by changing its brightness.</p>
+  </div>
+
+  <div class="participation" id="zen-participation" role="article">
+    <h3>3. Script 1: When Sprite Clicked</h3>
+    <pre><code class="lang-scratch">
+- **When this sprite clicked**
+  - Broadcast [start]
+  - Hide
+    </code></pre>
+    <p>This script will broadcast a start signal and hide the sprite when it is clicked.</p>
+  </div>
+
+  <div class="participation" id="zen-participation" role="article">
+    <h3>4. Script 2: When I Receive [end]</h3>
+    <pre><code class="lang-scratch">
+- **When I receive [end]**
+  - [block]
+    </code></pre>
+    <p>This script will execute the custom block when it receives the end signal.</p>
+  </div>
+
+  <div class="participation" id="zen-participation" role="article">
+    <h3>5. Script 3: Green Flag</h3>
+    <pre><code class="lang-scratch">
+- **When [green flag] clicked**
+  - [block]
+    </code></pre>
+    <p>This script will execute the custom block when the green flag is clicked, starting the program.</p>
+  </div>
+</div>
+{% endblock %}
+
+{% block design_selection %}
+<div class="design-selection" id="design-selection">
+  <h3 class="select">Table of Contents:</h3>
+  <nav role="navigation">
+    <ul>
+      <li><a href="#custom-block" class="design-name">1. Custom Block Definition</a></li>
+      <li><a href="#custom-block-definition" class="designer-name">2. Custom Block Definition</a></li>
+      <li><a href="#zen-participation" class="designer-name">3. Script 1: When Sprite Clicked</a></li>
+      <li><a href="#zen-participation" class="designer-name">4. Script 2: When I Receive [end]</a></li>
+      <li><a href="#zen-participation" class="designer-name">5. Script 3: Green Flag</a></li>
+    </ul>
+  </nav>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block aside %}
+{{ super() }}
+{% endblock %}
