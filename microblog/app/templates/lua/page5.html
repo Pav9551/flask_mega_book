@@ -89,11 +89,38 @@ local size = 10 -- размер матрицы
 -- Создание матрицы частей
 for i = 1, rows do
 	for j = 1, cols do
-		Position = Vector3.new(10, 0, 10) + Vector3.new((j - 1) * (size + spacing), spacing, (i - 1) * (size + spacing)) -- позиция части
+		Position = Vector3.new(10, 0, 10) + Vector3.new((j - 1) * (size + spacing), 0, (i - 1) * (size + spacing)) -- позиция части
 		local Spider = game.ReplicatedStorage['Kill brick']:Clone()
 		Spider.Parent = partsFolder -- помещаем его папку в Workspace.Parts (появляется на карте)
 		Spider.Position = Position + Vector3.new(0,3,0)
 	end
+end
+        </code></pre>
+
+        <p>Запустите игру, чтобы увидеть, как генерируются блоки, образуя полную матрицу.</p>
+    </div>
+	    <div class="explanation" id="random" role="article">
+        <h3>Часть 4: Создание случайного перемещения блоков</h3>
+        <p>Можно менять код.</p>
+
+        <h4>Код</h4>
+        <pre><code class="lang-lua">
+-- Функция для генерации случайной горизонтальной позиции
+local function getRandomHorizontalPosition()
+	local randomX = math.random(-10, 10)  -- Случайное изменение по оси X
+	local randomZ = math.random(-10, 10)  -- Случайное изменение по оси Z
+	return Vector3.new(randomX, 0, randomZ)
+end
+
+course = getRandomHorizontalPosition()
+
+-- Цикл бесконечного перемещения блока
+while true do
+	-- Устанавливаем новую цель позиции на основе случайного смещения
+	alignPosition.Position = part.Position + course
+	wait(1)
+	alignPosition.Position = part.Position - course
+	wait(1)
 end
         </code></pre>
 
