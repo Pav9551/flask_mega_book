@@ -1,8 +1,8 @@
 from app import app
 from flask import render_template
 from app.forms import LoginForm, AlgebraForm
-from flask import render_template, flash, redirect,  url_for
-from random import  randint
+from flask import render_template, flash, redirect,  url_for, request
+from random import  randint, choice
 import os
 from werkzeug.utils import secure_filename
 from flask_login import current_user, login_user
@@ -46,6 +46,21 @@ def generateQuestion():
         answer = num1 / num2
     return text,int(answer)
 
+symbols = ["🍒", "🔔", "🍋", "⭐", "🍇"]
+
+def spin():
+    return choice(symbols), choice(symbols), choice(symbols)
+
+def check_win(symbol1, symbol2, symbol3):
+    if symbol1 == symbol2 == symbol3:
+        if symbol1 == "🍒":
+            return "Вы выиграли 5x ставку!", 5
+        elif symbol1 == "🔔":
+            return "Вы выиграли 3x ставку!", 3
+        else:
+            return "Вы выиграли 2x ставку!", 2
+    else:
+        return "Попробуйте еще раз.", 0
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -75,6 +90,14 @@ def algebra():
         text, answer = generateQuestion()
         form.hidden_data.data = answer
         return render_template('algebra.html', title='Sign In', form=form, qwestion = text)
+@app.route('/slot', methods=['GET', 'POST'])
+def slot():
+    message = ""
+    symbols = ("", "🤗", "")
+    if request.method == 'POST':
+        symbols = spin()
+        message, multiplier = check_win(*symbols)
+    return render_template('slot.html', message=message, symbols=symbols)
 @app.route('/python')
 def python_ed():
     return render_template('python/page1.html')

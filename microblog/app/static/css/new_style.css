@@ -1,0 +1,76 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e0f7fa; /* Светло-голубой фон, ассоциирующийся со зимними мотивами */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+h1 {
+    color: #2b2b2b;
+    background: linear-gradient(90deg, #0000ff, #008000); /* Переход от синего к зеленому для заголовка */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 3.5em;
+    margin-bottom: 5px;
+}
+
+.slogan {
+    font-size: 1.4em;
+    color: #006064; /* Темно-синий оттенок для слогана */
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.slot-machine {
+    background-color: #ffffff;
+    border: 2px solid #006064; /* Темно-синий бордюр */
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 255, 0.2); /* Синяя тень для эффекта глубины */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.symbols {
+    font-size: 3em;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.symbols div {
+    padding: 10px;
+    border: 2px solid #0000ff; /* Синяя рамка для символов */
+    border-radius: 10px;
+    background-color: #e3f2fd; /* Светло-голубой фон для символов */
+    width: 60px;
+    text-align: center;
+    margin: 0 10px;
+}
+
+button {
+    background-color: #0000ff; /* Синяя кнопка */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: url('https://example.com/snowflake.png'), auto; /* Использование кастомного курсора в виде снежинки */
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #3949ab; /* Более темный синий при наведении */
+}
+
+p {
+    font-size: 1.2em;
+    color: #333;
+    margin: 0;
+}
