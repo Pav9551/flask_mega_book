@@ -92,7 +92,7 @@ def algebra():
         return render_template('algebra.html', title='Sign In', form=form, qwestion = text)
 @app.route('/slot', methods=['GET', 'POST'])
 def slot():
-    message = ""
+    message = "жми"
     symbols = ("", "🤗", "")
     if request.method == 'POST':
         symbols = spin()
