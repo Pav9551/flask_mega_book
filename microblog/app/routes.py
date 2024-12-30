@@ -168,3 +168,21 @@ def scratch_page2():
 @app.route('/scratch_page3')
 def scratch_page3():
     return render_template('scratch/page3.html')
+@app.route('/lua_intensiv')
+def lua_intensiv_page1():
+    return render_template('lua_intensiv/page1.html')
+@app.route('/lua_intensiv_page2')
+def lua_intensiv_page2():
+    return render_template('lua_intensiv/page2.html')
+@app.route('/lua_intensiv_page3')
+def lua_intensiv_page3():
+    return render_template('lua_intensiv/page3.html')
+@app.route('/lua_intensiv_page4')
+def lua_intensiv_page4():
+    return render_template('lua_intensiv/page4.html')
+@app.route('/lua_intensiv_page5')
+def lua_intensiv_page5():
+    return render_template('lua_intensiv/page5.html')
+@app.route('/lua_intensiv_page6')
+def lua_intensiv_page6():
+    return render_template('lua_intensiv/page6.html')
