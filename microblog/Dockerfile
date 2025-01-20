@@ -1,4 +1,4 @@
-# Выкачиваем из dockerhub образ с python версии 3.9
+# Выкачиваем из dockerhub образ с python версии 3.11
 FROM python:3.11
 # Устанавливаем рабочую директорию для проекта в контейнере
 WORKDIR /microblog
