@@ -1,0 +1,56 @@
+version: '3'
+services:
+  flask:
+    # Путь до Dockerfile
+    build: ./microblog
+    # Имя для создаваемого контейнера
+    container_name: backend-flask
+    # Создание переменных окружения в контейнере
+    environment:
+      # для отладки (при запуске в релиз убрать!)
+      - FLASK_ENV=development
+      ## Позволяет отслеживать процесс работы приложения в командной строке
+      - PYTHONUNBUFFERED=True                   
+      ##
+    # Перезапускаем сервис в случае падения 
+    restart: unless-stopped
+    # Прокладывам путь для файлов. Все файлы, которые хранятся у вас в 
+    # директории ./microblog, появятся в директории контейнера /backend
+    volumes:
+      - ./microblog:/microblog
+    # Открываем порт в контейнер
+    # Порт, который будет смотреть наружу : порт который используется внутри контейнера
+    ports:
+      - "5000:5000"
+    #command: gunicorn main:app -b 0.0.0.0:5000 --reload
+    networks:
+      - backend
+      - frontend
+
+  nginx:
+    image: nginx:1.23-alpine
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/conf.d/app.conf:/etc/nginx/conf.d/app.conf:ro
+      #- ./.lego/certificates:/certs:ro
+      #- ./web:/web:ro
+    depends_on:
+      - flask
+    networks:
+      - frontend
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+
+volumes:
+  appdata:
+    driver: local
+  nginxdata:
+    driver: local
