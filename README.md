@@ -14,6 +14,7 @@ git pull
 #go version
 
 #go install github.com/go-acme/lego/v4/cmd/lego@latest
+#which lego
 #sudo ln -s /root/go/bin/lego /usr/local/bin/lego
 #sudo lego --email="mail@gmail.com" --domains="gitea.example.pw" --http run
 
