@@ -17,3 +17,5 @@ git pull
 #sudo ln -s /root/go/bin/lego /usr/local/bin/lego
 #sudo lego --email="mail@gmail.com" --domains="gitea.example.pw" --http run
 
+sudo lego --email="mail@gmail.com" --domains="gitea.example.pw" --http --http.port=8080 run
+
