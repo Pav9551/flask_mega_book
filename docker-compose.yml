@@ -22,6 +22,8 @@ services:
     # Порт, который будет смотреть наружу : порт который используется внутри контейнера
     ports:
       - "5000:5000"
+    env_file:
+      - ./.env
     #command: gunicorn main:app -b 0.0.0.0:5000 --reload
     networks:
       - backend
@@ -36,7 +38,7 @@ services:
       - 443:443
     volumes:
       - ./nginx/conf.d/app.conf:/etc/nginx/conf.d/app.conf:ro
-      #- ./.lego/certificates:/certs:ro
+      - ./.lego/certificates:/certs:ro
       #- ./web:/web:ro
     depends_on:
       - flask
