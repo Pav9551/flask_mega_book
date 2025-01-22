@@ -1,0 +1,84 @@
+/* banana-style.css */
+
+body {
+    background-color: #fffde7; /* Светлый желтый, похожий на банановую кожуру */
+    color: #333; /* Темный текст для контраста */
+    font-family: 'Comic Sans MS', sans-serif; /* Веселый шрифт */
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #ff9900; /* Глубокий оранжево-желтый цвет */
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px; /* Закругленные углы */
+    padding: 5px 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+a:hover {
+    background-color: #ffe082; /* Светло-оранжевый фон при наведении */
+    color: #000; /* Четкий черный текст */
+    transform: scale(1.1); /* Легкое увеличение при наведении */
+}
+
+div {
+    background-color: #fff8e1; /* Очень светлый желтый */
+    padding: 15px;
+    border-radius: 10px; /* Закругленные углы */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Нежная тень */
+    text-align: center;
+}
+
+hr {
+    border: 0;
+    height: 2px;
+    background-color: #ffcc00; /* Яркий желтый */
+    margin: 20px 0;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin: 5px 0;
+    padding: 10px;
+    background-color: #ffe082; /* Светло-оранжевый */
+    color: #333; /* Темный текст */
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Легкая тень */
+}
+
+li:hover {
+    background-color: #ffd54f; /* Насыщенный желтый при наведении */
+    color: #000; /* Черный текст */
+}
+
+header, footer {
+    background-color: #ffeb3b; /* Яркий бананово-желтый */
+    color: #000; /* Черный текст */
+    padding: 10px 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+button {
+    background-color: #ff9900; /* Глубокий оранжевый */
+    color: #fff; /* Белый текст */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #ffcc80; /* Светло-оранжевый при наведении */
+    color: #000; /* Черный текст для контраста */
+    transform: translateY(-2px); /* Легкий подъем при наведении */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Тень при наведении */
+}
