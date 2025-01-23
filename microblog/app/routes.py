@@ -8,10 +8,12 @@ from werkzeug.utils import secure_filename
 from flask_login import current_user, login_user
 from app.models import User
 from flask_login import logout_user
+from flask_login import login_required
+from urllib.parse import urlparse
 @app.route('/')
 @app.route('/index')
+@login_required
 def index():
-    user = {'username': 'Miguel', 'admin': 'El Primo'}
     posts = [
         {
         'author': {'username': 'John'},
@@ -22,7 +24,7 @@ def index():
         'body': 'The Avengers movie was so cool!'
         }
         ]
-    return render_template('index.html', title='Home', user=user, posts = posts)
+    return render_template('index.html', title='Home', posts = posts)
 def generateQuestion():
     num1 = randint(1,10)
     num2 = randint(1,10)
@@ -72,8 +74,16 @@ def login():
             flash('Invalid username or password')
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
-        return redirect(url_for('index'))
+        next_page = request.args.get('next')
+        if not next_page or urlparse(next_page).netloc != '': #or url_parse(next_page).netloc != '':
+            next_page = url_for('index')
+        return redirect(next_page)
+        #return redirect(url_for('index'))
     return render_template('login.html', title='Sign In', form=form)
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
 @app.route('/algebra', methods=['GET', 'POST'])
 def algebra():
     form = AlgebraForm()

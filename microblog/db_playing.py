@@ -4,7 +4,8 @@ from app.models import User, Post
 
 
 with app.app_context():
-    u = User(username='john', email='john@example.com')
+    u = User(username='name', email='name@example.com')
+    u.set_password('pass')
     db.session.add(u)
     db.session.commit()
     users = User.query.all()

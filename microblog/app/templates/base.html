@@ -11,8 +11,13 @@
 </head>
 <body>
     <div>
-        Microblog: <a href="/index">Home</a>
-        Login: <a href="/login">Login</a>
+        Microblog:
+        <a href="{{ url_for('index') }}">Home</a>
+        {% if current_user.is_anonymous %}
+        <a href="{{ url_for('login') }}">Login</a>
+        {% else %}
+        <a href="{{ url_for('logout') }}">Logout</a>
+        {% endif %}
         Algebra: <a href="/algebra">Algebra</a>
         Python: <a href="/python">python</a>
         Lua: <a href="/lua">lua</a>
