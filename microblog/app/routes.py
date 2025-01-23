@@ -18,12 +18,12 @@ from urllib.parse import urlparse
 def index():
     posts = [
         {
-        'author': {'username': 'John'},
-        'body': 'Beautiful day in Portland!'
+        'author': {'username': 'Автор'},
+        'body': 'Преветствую Вас на сайте!'
         },
         {
-        'author': {'username': 'Susan'},
-        'body': 'The Avengers movie was so cool!'
+        'author': {'username': 'Автор'},
+        'body': 'Изучайте программирование вместе с нами!'
         }
         ]
     return render_template('index.html', title='Home', posts = posts)
