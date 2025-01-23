@@ -127,6 +127,8 @@ ul{
   padding-left: 0;
 }
 
+
+
 li {
   border-width: 5px;
   border-style: solid;
@@ -155,6 +157,29 @@ li:active {
   border-left-color: #507dbc;
   border-right-color: #bbd1ea;
   border-bottom-color: #bbd1ea;
+}
+
+/* Стили для ul внутри .explanation */
+.explanation ul {
+  list-style-type: disc;  /* Кружки перед элементами списка */
+  margin-left: 20px;  /* Отступ слева от маркеров */
+  padding-left: 20px; /* Отступ слева для самого списка */
+}
+
+/* Стили для li внутри .explanation */
+.explanation li {
+  font-family: 'Arial', sans-serif;  /* Стандартный шрифт */
+  background-color: transparent;  /* Прозрачный фон, чтобы использовать фон родительского элемента */
+  border: none;  /* Без бордера по умолчанию */
+  padding: 5px;  /* Стандартные отступы для читаемости */
+  margin-bottom: 5px;  /* Отступ снизу для разделения элементов */
+  text-align: left;  /* Выравнивание текста по левому краю */
+}
+
+/* Эффект при наведении на li в .explanation */
+.explanation li:hover {
+  background-color: #f0f0f0;  /* Легкий серый фон при наведении */
+  cursor: pointer;  /* Курсор изменяется на указатель */
 }
 
 a {

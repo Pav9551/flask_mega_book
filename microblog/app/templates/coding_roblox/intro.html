@@ -1,0 +1,179 @@
+{% extends "coding_roblox/base_zen_garden.html" %}
+{% block title %}Основы обучения Lua для Roblox{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block body %}
+{{ super() }}
+{% endblock %}
+{% block preamble %}
+    <div class="preamble" id="aspects-overview" role="article">
+        <h3>📜 Введение. Основы изучения Roblox Studio</h3>
+        <p>Разработка игр в Roblox требует знаний как программирования, так и дизайна. Ознакомьтесь с основными навыками, которые нужны для создания игры со своим сценарием.</p>
+    </div>
+{% endblock %}
+{% block main_supporting %}
+    <div class="main supporting" id="aspects" role="main">
+
+        <div class="explanation" id="basics" role="article">
+            <h3>📖 1. Основы Lua</h3>
+            <ul>
+                <li><b>Переменные и типы данных:</b> числа, строки, булевые значения, таблицы.</li>
+                <li><b>Управляющие конструкции:</b>
+                    <ul>
+                        <li>Условные операторы (<code>if</code>, <code>elseif</code>, <code>else</code>).</li>
+                        <li>Циклы (<code>for</code>, <code>while</code>, <code>repeat-until</code>).</li>
+                    </ul>
+                </li>
+                <li><b>Функции:</b> определение, параметры, возвращаемые значения.</li>
+                <li><b>Таблицы:</b> создание, доступ к элементам, ассоциативные массивы.</li>
+                <li><b>Метатаблицы:</b> работа с метаметодами (<code>__index</code>, <code>__newindex</code>, <code>__add</code>).</li>
+                <li><b>Работа с модулями:</b> подключение и использование Lua-модулей.</li>
+            </ul>
+        </div>
+
+        <div class="explanation" id="studio" role="article">
+            <h3>🏗️ 2. Основы Roblox Studio</h3>
+            <ul>
+                <li><b>Интерфейс:</b> работа с Workspace, Explorer, Properties.</li>
+                <li><b>Устройство объектов:</b>
+                    <ul>
+                        <li>Иерархия (Parent, Children).</li>
+                        <li>Классы (Part, Model, Script, ModuleScript).</li>
+                        <li>Свойства, методы, события.</li>
+                    </ul>
+                </li>
+                <li><b>Работа с Service’ами:</b> Workspace, Players, ReplicatedStorage, ServerStorage, Lighting.</li>
+            </ul>
+        </div>
+
+        <div class="explanation" id="events" role="article">
+            <h3>⏳ 3. Событийная модель в Roblox</h3>
+            <ul>
+                <li><b>Работа с событиями:</b> Touched, Changed, MouseClick и т.д.</li>
+                <li><b>Использование Connect:</b> привязка функций к событиям.</li>
+                <li><b>Создание событий:</b> с помощью BindableEvent и BindableFunction.</li>
+            </ul>
+        </div>
+
+        <div class="explanation" id="architecture" role="article">
+            <h3>🌐 4. Основы клиент-серверной архитектуры</h3>
+            <ul>
+                <li><b>Скрипты:</b> Script (сервер), LocalScript (клиент), ModuleScript (библиотеки).</li>
+                <li><b>Remote Events и Functions:</b> передача данных между клиентом и сервером, проверка данных.</li>
+            </ul>
+        </div>
+
+        <div class="explanation" id="ui" role="article">
+            <h3>🖥️ 5. Работа с UI (пользовательским интерфейсом)</h3>
+            <ul>
+                <li><b>Создание интерфейса:</b> ScreenGui, TextLabel, TextButton, Frame, ImageLabel.</li>
+                <li><b>Скрипты для UI:</b> динамическое изменение элементов, обработка событий.</li>
+            </ul>
+        </div>
+
+        <div class="explanation" id="physics" role="article">
+            <h3>⚙️ 6. Работа с физикой и анимациями</h3>
+            <ul>
+                <li><b>Физика:</b> применение сил, BodyVelocity, BodyGyro.</li>
+                <li><b>Анимации:</b> создание через Animation Editor, воспроизведение через Animator.</li>
+            </ul>
+        </div>
+
+        <div class="explanation" id="design" role="article">
+            <h3>🎮 7. Основы геймдизайна в Roblox</h3>
+            <ul>
+                <li><b>Интерактивные объекты:</b> кнопки, двери, ловушки.</li>
+                <li><b>Инвентарь и предметы:</b> сохранение данных, коллекционные системы.</li>
+                <li><b>Игровые механики:</b> сбор монет, телепортация.</li>
+            </ul>
+        </div>
+
+        <div class="explanation" id="data" role="article">
+            <h3>💾 8. Работа с данными</h3>
+            <ul>
+                <li><b>Сохранение данных игроков:</b> использование DataStoreService.</li>
+                <li><b>Валидация данных:</b> обработка ошибок.</li>
+            </ul>
+        </div>
+
+        <div class="explanation" id="advanced" role="article">
+            <h3>🧠 9. Продвинутые техники</h3>
+            <ul>
+                <li><b>ООП в Lua:</b> классы, объекты, метатаблицы.</li>
+                <li><b>Оптимизация:</b> сокращение использования ресурсов, управление циклами.</li>
+                <li><b>Сложные системы:</b> генерация карт, алгоритмы для AI.</li>
+            </ul>
+        </div>
+
+        <div class="explanation" id="multiplayer" role="article">
+            <h3>👥 10. Сетевые и многопользовательские аспекты</h3>
+            <ul>
+                <li><b>Синхронизация данных:</b> взаимодействие между игроками.</li>
+                <li><b>Механики PvP и кооператив:</b> создание взаимодействий.</li>
+                <li><b>Лидеры:</b> Leaderboards.</li>
+            </ul>
+        </div>
+
+        <div class="explanation" id="debugging" role="article">
+            <h3>🔍 11. Тестирование и отладка</h3>
+            <ul>
+                <li><b>Инструменты:</b> встроенные средства Roblox Studio.</li>
+                <li><b>Вывод:</b> print, warn, error.</li>
+                <li><b>Логирование ошибок:</b> клиент и сервер.</li>
+            </ul>
+        </div>
+
+    </div>
+{% endblock %}
+{% block design_selection %}
+    <div class="design-selection" id="design-selection">
+        <h3 class="select">Оглавление:</h3>
+        <nav role="navigation">
+            <ul>
+                <li>
+                    <a href="#aspects-overview" class="design-name">📜 Основы обучения Lua для Roblox</a>
+                </li>
+                <li>
+                    <a href="#basics" class="designer-name">📖 Основы Lua</a>
+                </li>
+                <li>
+                    <a href="#studio" class="designer-name">🏗️ Основы Roblox Studio</a>
+                </li>
+                <li>
+                    <a href="#events" class="designer-name">⏳ Событийная модель</a>
+                </li>
+                <li>
+                    <a href="#architecture" class="designer-name">🌐 Клиент-серверная архитектура</a>
+                </li>
+                <li>
+                    <a href="#ui" class="designer-name">🖥️ Пользовательский интерфейс</a>
+                </li>
+                <li>
+                    <a href="#physics" class="designer-name">⚙️ Физика и анимации</a>
+                </li>
+                <li>
+                    <a href="#design" class="designer-name">🎮 Основы геймдизайна</a>
+                </li>
+                <li>
+                    <a href="#data" class="designer-name">💾 Работа с данными</a>
+                </li>
+                <li>
+                    <a href="#advanced" class="designer-name">🧠 Продвинутые техники</a>
+                </li>
+                <li>
+                    <a href="#multiplayer" class="designer-name">👥 Многопользовательские аспекты</a>
+                </li>
+                <li>
+                    <a href="#debugging" class="designer-name">🔍 Тестирование и отладка</a>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+{% endblock %}
+{% block footer %}
+{% endblock %}
+{% block aside %}
+{{ super() }}
+{% endblock %}
