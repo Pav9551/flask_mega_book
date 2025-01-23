@@ -129,39 +129,51 @@ def slot():
 def python_ed():
     return render_template('python/page1.html')
 @app.route('/python_page2')
+@login_required
 def python_page2():
     return render_template('python/page2.html')
 @app.route('/python_page3')
+@login_required
 def python_page3():
     return render_template('python/page3.html')
 @app.route('/python_page4')
+@login_required
 def python_page4():
     return render_template('python/page4.html')
 @app.route('/python_page5')
+@login_required
 def python_page5():
     return render_template('python/page5.html')
 @app.route('/python_page6')
+@login_required
 def python_page6():
     return render_template('python/page6.html')
 @app.route('/python_page7')
+@login_required
 def python_page7():
     return render_template('python/page7.html')
 @app.route('/python_page8')
+@login_required
 def python_page8():
     return render_template('python/page8.html')
 @app.route('/python_page9')
+@login_required
 def python_page9():
     return render_template('python/page9.html')
 @app.route('/python_page10')
+@login_required
 def python_page10():
     return render_template('python/page10.html')
 @app.route('/python_page11')
+@login_required
 def python_page11():
     return render_template('python/page11.html')
 @app.route('/python_page12')
+@login_required
 def python_page12():
     return render_template('python/page12.html')
 @app.route('/python_page13')
+@login_required
 def python_page13():
     return render_template('python/page13.html')
 @app.route('/lua')
