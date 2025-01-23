@@ -19,7 +19,7 @@ def index():
     posts = [
         {
         'author': {'username': 'Автор'},
-        'body': 'Преветствую Вас на сайте!'
+        'body': 'Приветствую Вас на сайте!'
         },
         {
         'author': {'username': 'Автор'},
