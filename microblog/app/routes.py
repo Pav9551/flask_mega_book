@@ -197,6 +197,15 @@ def lua_page5():
 @app.route('/lua_page6')
 def lua_page6():
     return render_template('lua/page6.html')
+@app.route('/coding_roblox_intro')
+def coding_roblox_intro():
+    return render_template('coding_roblox/intro.html')
+@app.route('/coding_roblox')
+def coding_roblox():
+    return render_template('coding_roblox/page1.html')
+@app.route('/coding_roblox_page2')
+def coding_roblox_page2():
+    return render_template('coding_roblox/page2.html')
 
 @app.route('/scratch')
 def scratch_ed():
@@ -207,6 +216,7 @@ def scratch_page2():
 @app.route('/scratch_page3')
 def scratch_page3():
     return render_template('scratch/page3.html')
+
 @app.route('/lua_intensiv')
 def lua_intensiv_page1():
     return render_template('lua_intensiv/page1.html')

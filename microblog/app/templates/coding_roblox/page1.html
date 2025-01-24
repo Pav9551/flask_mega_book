@@ -1,0 +1,85 @@
+{% extends "coding_roblox/base_zen_garden.html" %}
+{% block title %}Аспекты разработки в Roblox{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block body %}
+{{ super() }}
+{% endblock %}
+{% block preamble %}
+    <div class="preamble" id="aspects-overview" role="article">
+        <h3>1. Основные аспекты разработки в Roblox</h3>
+        <p>Разработка игр в Roblox включает множество аспектов, от программирования до дизайна. Здесь мы рассмотрим ключевые области, чтобы помочь вам разобраться и выбрать свой путь.</p>
+    </div>
+{% endblock %}
+{% block main_supporting %}
+    <div class="main supporting" id="aspects" role="main">
+
+        <div class="explanation" id="design" role="article">
+            <h3>2.1 Дизайн уровней</h3>
+            <p>Дизайн уровней — это создание игрового пространства, где игроки взаимодействуют с миром. В Roblox Studio для этого используется окно <b>Explorer</b> и инструменты редактирования объектов.</p>
+            <p>Вы можете:</p>
+                <ol>
+                    <li>Создавать объекты вручную через кнопку "+" в Explorer.</li>
+                    <li>Настраивать их свойства, такие как размер, форма и цвет в Properties.</li>
+                    <li>Использовать готовые модели из Toolbox.</li>
+                </ol>
+
+        </div>
+        <div class="explanation" id="programming" role="article">
+            <h3>2.2 Программирование</h3>
+            <p>Программирование — это основа разработки игр. Например, нажатие по объекту может вызвать некоторую реакцию:</p>
+            <p>Создайте элементы пользовательского интерфейса согласнно рисунку 1:</p>
+			<figure>
+			<img src="/static/coding_roblox/ClickDetector.png" alt="Trulli" style="width:100%">
+  			<figcaption>Рис.1 - Применение объекта класса ClickDetector.</figcaption>
+			</figure>
+            <pre><code class="lang-lua">
+--определяем ссылка на ClickDetector
+local ClickDetector = script.Parent
+--определяем функцию
+local function onClick()
+	script.Parent.Parent.BrickColor = BrickColor.new("Really red")
+	print("ClickDetector сработал!")
+end
+--определяем взаимосвязь между событием нажатия и функцией
+ClickDetector.MouseClick:Connect(onClick)
+            </code></pre>
+            <li>Окно Output позволяет выводить данные для отладки</li>
+            <p>Программирование позволяет создавать игровые механики, взаимодействия и эффекты. Начните с создания простых скриптов для базового понимания.</p>
+
+        </div>
+        <div class="explanation" id="ui" role="article">
+            <h3>2.3 Разработка пользовательского интерфейса (UI)</h3>
+            <p>Интерфейс пользователя — это то, что помогает игрокам взаимодействовать с игрой. Roblox предоставляет инструменты для создания интерфейсов, таких как текстовые метки, кнопки и окна.</p>
+        </div>
+
+    </div>
+{% endblock %}
+{% block design_selection %}
+    <div class="design-selection" id="design-selection">
+        <h3 class="select">Оглавление:</h3>
+        <nav role="navigation">
+            <ul>
+                <li>
+                    <a href="#aspects-overview" class="design-name">1. Основные аспекты разработки</a>
+                </li>
+                <li>
+                    <a href="#design" class="designer-name">2.1 Дизайн уровней</a>
+                </li>
+                <li>
+                    <a href="#programming" class="designer-name">2.2 Программирование</a>
+                </li>
+                <li>
+                    <a href="#ui" class="designer-name">2.3 Пользовательский интерфейс</a>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+{% endblock %}
+{% block footer %}
+{% endblock %}
+{% block aside %}
+{{ super() }}
+{% endblock %}
