@@ -24,6 +24,10 @@ def index():
         {
         'author': {'username': 'Автор'},
         'body': 'Изучайте программирование вместе с нами!'
+        },
+        {
+        'author': {'username': 'Автор'},
+        'body': 'Не работает Roblox Studio - изучай lua в браузере https://onecompiler.com/lua'
         }
         ]
     return render_template('index.html', title='Home', posts = posts)
