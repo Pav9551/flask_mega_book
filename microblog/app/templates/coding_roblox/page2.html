@@ -1,0 +1,153 @@
+{% extends "coding_roblox/base_zen_garden.html" %}
+{% block title %}Изучение Lua{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block body %}
+{{ super() }}
+{% endblock %}
+{% block preamble %}
+    <div class="preamble" id="lua-overview" role="article">
+        <h3>1. Основы языка Lua</h3>
+        <p>Lua — это лёгкий, быстрый и гибкий язык программирования. Он используется в разных областях, от игр до приложений. Здесь мы рассмотрим его основные принципы через примеры и задания.</p>
+    </div>
+{% endblock %}
+{% block main_supporting %}
+    <div class="main supporting" id="lua-aspects" role="main">
+
+        <div class="explanation" id="syntax" role="article">
+            <h3>2.1 Основы синтаксиса</h3>
+            <p>Lua предлагает простой и понятный синтаксис. Например, условные операторы позволяют проверять условия и выполнять соответствующие действия:</p>
+
+            <pre><code class="lang-lua">
+local item1 = "Fruit"
+local item2 = "Vegetable"
+if item1 == "Fruit" and item2 == "Fruit" then
+    print("Both fruit.") --No output as requirements not met.
+end
+            </code></pre>
+
+            <p><b>Задание:</b> Измените код так, чтобы условие выполнялось и выводилось "Both fruit.". Попробуйте подумать, что нужно поменять!</p>
+
+            <p>Подсказка: Измените значение <code>item2</code> на "Fruit", чтобы оба условия стали истинными.</p>
+
+            <pre><code class="lang-lua">
+-- Изменённый код
+local item1 = "Fruit"
+*Здесь нужно подумать*
+if item1 == "Fruit" and item2 == "Fruit" then
+    print("Both fruit.") -- Output: Both fruit.
+end
+            </code></pre>
+
+            <p><b>Дополнительное задание:</b> Добавьте ещё одно условие для проверки, что <code>item1</code> и <code>item2</code> не равны "Vegetable". Выведите сообщение "Only fruit allowed.".</p>
+
+            <pre><code class="lang-lua">
+-- Ваш код здесь
+local item1 = "Fruit"
+local item2 = "Fruit"
+if item1 == "Fruit" and item2 == "Fruit" and item1 ~= "Vegetable" and item2 ~= "Vegetable" then
+    print("Only fruit allowed.")
+end
+            </code></pre>
+
+        </div>
+
+        <div class="explanation" id="tasks" role="article">
+            <h3>2.2 Задания</h3>
+            <p>Попробуйте выполнить следующие задания, чтобы лучше понять синтаксис Lua:</p>
+
+            <ol>
+                <li>
+                    Напишите условие, которое проверяет, равен ли <code>number1</code> значению 10 и <code>number2</code> значению 20. Если условие выполняется, выведите "Numbers match!".
+                </li>
+                <pre><code class="lang-lua">
+-- Ваш код здесь
+local number1 = 10
+local number2 = 20
+if number1 == 10 and number2 == 20 then
+    print("Numbers match!")
+end
+                </code></pre>
+
+                <p><b>Дополнительное задание:</b> Добавьте проверку, что <code>number1</code> больше 5 и <code>number2</code> меньше 25. Выведите сообщение "Numbers are in range!".</p>
+
+                <pre><code class="lang-lua">
+-- Ваш код здесь
+local number1 = 10
+local number2 = 20
+if number1 > 5 and number2 < 25 then
+    print("Numbers are in range!")
+end
+                </code></pre>
+
+                <li>
+                    Напишите цикл, который выводит числа от 1 до 5.
+                </li>
+                <pre><code class="lang-lua">
+-- Ваш код здесь
+for i = 1, 5 do
+    print(i)
+end
+                </code></pre>
+
+                <p><b>Дополнительное задание:</b> Измените цикл так, чтобы он выводил только нечётные числа в диапазоне от 1 до 10.</p>
+
+                <pre><code class="lang-lua">
+-- Ваш код здесь
+for i = 1, 10, 2 do
+    print(i)
+end
+                </code></pre>
+
+                <li>
+                    Создайте таблицу (массив) с тремя именами и выведите их с помощью цикла.
+                </li>
+                <pre><code class="lang-lua">
+-- Ваш код здесь
+local names = {"Alice", "Bob", "Charlie"}
+for i, name in ipairs(names) do
+    print(name)
+end
+                </code></pre>
+
+                <p><b>Дополнительное задание:</b> Добавьте ещё одно имя в таблицу и выведите только те имена, которые начинаются с буквы "A".</p>
+
+                <pre><code class="lang-lua">
+-- Ваш код здесь
+local names = {"Alice", "Bob", "Charlie", "Anna"}
+for i, name in ipairs(names) do
+    if name:sub(1, 1) == "A" then
+        print(name)
+    end
+end
+                </code></pre>
+
+            </ol>
+        </div>
+
+    </div>
+{% endblock %}
+{% block design_selection %}
+    <div class="design-selection" id="design-selection">
+        <h3 class="select">Оглавление:</h3>
+        <nav role="navigation">
+            <ul>
+                <li>
+                    <a href="#lua-overview" class="design-name">1. Основы Lua</a>
+                </li>
+                <li>
+                    <a href="#syntax" class="designer-name">2.1 Основы синтаксиса</a>
+                </li>
+                <li>
+                    <a href="#tasks" class="designer-name">2.2 Задания</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+{% endblock %}
+{% block footer %}
+{% endblock %}
+{% block aside %}
+{{ super() }}
+{% endblock %}
