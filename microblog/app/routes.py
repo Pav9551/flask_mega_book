@@ -12,6 +12,7 @@ from app.models import User
 from flask_login import logout_user
 from flask_login import login_required
 from urllib.parse import urlparse
+from datetime import datetime, timedelta
 @app.route('/')
 @app.route('/index')
 @login_required
@@ -27,7 +28,7 @@ def index():
         },
         {
         'author': {'username': 'Автор'},
-        'body': 'Не работает Roblox Studio - изучай lua в браузере https://onecompiler.com/lua'
+        'body': 'Не работает Roblox Studio - изучай lua в браузере https://www.bejson.com/en/runcode/lua/'
         }
         ]
     return render_template('index.html', title='Home', posts = posts)
@@ -239,3 +240,17 @@ def lua_intensiv_page5():
 @app.route('/lua_intensiv_page6')
 def lua_intensiv_page6():
     return render_template('lua_intensiv/page6.html')
+@app.route('/user/<username>')
+@login_required
+def user(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = [
+        {'author': user, 'body': 'Test post #1'},
+        {'author': user, 'body': 'Test post #2'}
+    ]
+    return render_template('user.html', user=user, posts=posts)
+@app.before_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.last_seen = datetime.utcnow() + timedelta(hours=3)
+        db.session.commit()

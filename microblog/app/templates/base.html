@@ -7,7 +7,7 @@
     {% else %}
     <title>Welcome to Microblog</title>
     {% endif %}
-    <link rel="stylesheet" href="static/css/banana-style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/banana-style.css') }}">
 </head>
 <body>
     <div>
@@ -16,6 +16,7 @@
         {% if current_user.is_anonymous %}
         <a href="{{ url_for('login') }}">Login</a>
         {% else %}
+        <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
         <a href="{{ url_for('logout') }}">Logout</a>
         {% endif %}
         Python: <a href="/python">python</a>
