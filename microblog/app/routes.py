@@ -271,3 +271,4 @@ def before_request():
     if current_user.is_authenticated:
         current_user.last_seen = datetime.utcnow() + timedelta(hours=3)
         db.session.commit()
+
