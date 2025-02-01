@@ -1,0 +1,314 @@
+{% extends "coding_roblox/base_zen_garden.html" %}
+{% block title %}Основные типы данных в Lua{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block body %}
+{{ super() }}
+{% endblock %}
+{% block preamble %}
+    <div class="preamble" id="lua-overview" role="article">
+        <h3>1. Основные типы данных в Lua</h3>
+        <p>Запустите Roblox studio и создайте объект Script внутри службы ServerScriptService в окне Explorer (Рис 2).</p>
+        <figure>
+			<img src="/static/coding_roblox/empty_script.png" alt="Trulli" style="width:100%">
+  			<figcaption>Рис.2 - Окно Explorer и служба ServerScriptService</figcaption>
+		</figure>
+        <p>Откройте окно Output, напишите програмный код внутри объекта Script и запустите игру Roblox Studio </p>
+    </div>
+{% endblock %}
+{% block main_supporting %}
+    <div class="main supporting" id="lua-aspects" role="main">
+
+        <!-- Пример 1: Числа -->
+        <div class="explanation" id="numbers" role="article">
+            <h3>2.1 Числа</h3>
+            <p>Числа в Lua могут быть целыми или дробными. Пример:</p>
+
+            <pre><code class="lang-lua">
+-- Пример инициализации числа
+local myNumber = 99
+
+-- Арифметические операции
+local sum = myNumber + 1
+local difference = myNumber - 10
+local product = myNumber * 2
+local quotient = myNumber / 3
+local remainder = myNumber % 4
+
+print("Sum:", sum)
+print("Difference:", difference)
+print("Product:", product)
+print("Quotient:", quotient)
+print("Remainder:", remainder)
+            </code></pre>
+
+            <p><b>Задание:</b> Создайте переменную <code>myNumber</code> и присвойте ей значение 50. Затем вычислите и выведите результат умножения на 2.</p>
+
+            <pre><code class="lang-lua">
+-- Ваш код здесь
+local myNumber = 50
+local result = myNumber * 2
+print("Result:", result)
+            </code></pre>
+        </div>
+
+        <!-- Пример 2: Логические значения (Boolean) -->
+        <div class="explanation" id="booleans" role="article">
+            <h3>2.2 Логические значения (Boolean)</h3>
+            <p>Логические значения могут быть только <code>true</code> или <code>false</code>. Пример:</p>
+
+            <pre><code class="lang-lua">
+-- Пример инициализации логического значения
+local myBool = true
+
+-- Инверсия логического значения
+myBool = not myBool
+
+print("My Bool:", myBool)
+            </code></pre>
+
+            <p><b>Задание:</b> Создайте переменную <code>isGameActive</code> и присвойте ей значение <code>false</code>. Затем инвертируйте её значение и выведите результат.</p>
+
+            <pre><code class="lang-lua">
+-- Ваш код здесь
+local isGameActive = false
+isGameActive = not isGameActive
+print("Is Game Active?", isGameActive)
+            </code></pre>
+        </div>
+
+        <!-- Пример 3: Строки -->
+        <div class="explanation" id="strings" role="article">
+            <h3>2.3 Строки</h3>
+            <p>Строки в Lua могут быть созданы с использованием двойных кавычек или многострочных скобок. Пример:</p>
+
+            <pre><code class="lang-lua">
+-- Пример инициализации строки
+local myString = "Hello"
+
+-- Конкатенация строк
+myString = myString .. " World!"
+
+-- Экранирование символов
+local escapedString = "This is a new line\n\tThis is a tab"
+
+-- Многострочные строки
+local multiLineString = [[
+This is a multi-line string.
+It can span multiple lines.
+]]
+
+print("My String:", myString)
+print("Escaped String:", escapedString)
+print("Multi-line String:", multiLineString)
+            </code></pre>
+
+            <p><b>Задание:</b> Создайте строку <code>greeting</code> со значением "Hello" и добавьте к ней строку " Lua!". Выведите результат.</p>
+
+            <pre><code class="lang-lua">
+-- Ваш код здесь
+local greeting = "Hello"
+greeting = greeting .. " Lua!"
+print("Greeting:", greeting)
+            </code></pre>
+        </div>
+
+        <!-- Пример 4: Таблицы -->
+        <div class="explanation" id="tables" role="article">
+            <h3>2.4 Таблицы</h3>
+            <p>Таблицы в Lua используются для хранения коллекций данных. Пример:</p>
+
+            <pre><code class="lang-lua">
+-- Пример инициализации таблицы
+local myTable = {1, 2, 3}
+
+-- Добавление элемента в таблицу
+table.insert(myTable, 4)
+
+-- Удаление элемента из таблицы
+table.remove(myTable, 2)
+
+print("Table:", table.concat(myTable, ", "))
+            </code></pre>
+
+            <p><b>Задание:</b> Создайте таблицу <code>myTable</code> с элементами 10, 20, 30. Добавьте элемент 40 и выведите таблицу.</p>
+
+            <pre><code class="lang-lua">
+-- Ваш код здесь
+local myTable = {10, 20, 30}
+table.insert(myTable, 40)
+print("Table:", table.concat(myTable, ", "))
+            </code></pre>
+        </div>
+
+        <!-- Пример 5: Словари (Dictionaries) -->
+        <div class="explanation" id="dictionaries" role="article">
+            <h3>2.5 Словари (Dictionaries)</h3>
+            <p>Словари — это таблицы, где данные хранятся в виде пар ключ-значение. Пример:</p>
+
+            <pre><code class="lang-lua">
+-- Пример инициализации словаря
+local menu = {
+    appetizer = "Салат",
+    entree = "Сэндвич",
+    dessert = "Мороженое"
+}
+
+-- Доступ к элементу по ключу
+print("Entree:", menu.entree)
+            </code></pre>
+
+            <p><b>Задание:</b> Создайте словарь <code>player</code> с ключами <code>name</code>, <code>health</code>, и <code>level</code>. Выведите значение ключа <code>name</code>.</p>
+
+            <pre><code class="lang-lua">
+-- Ваш код здесь
+local player = {
+    name = "Robloxian",
+    health = 100,
+    level = 5
+}
+print("Player Name:", player.name)
+            </code></pre>
+        </div>
+
+        <!-- Пример 6: Векторы (Vectors) -->
+        <div class="explanation" id="vectors" role="article">
+            <h3>2.6 Векторы (Vectors)</h3>
+            <p>Векторы используются для представления направлений и величин в 3D пространстве. Пример:</p>
+
+            <pre><code class="lang-lua">
+-- Пример инициализации вектора
+local myVector = Vector3.new(1, 2, 3)
+
+-- Арифметика с векторами
+local newVector = myVector + Vector3.new(1, 1, 1)
+
+print("New Vector:", newVector)
+            </code></pre>
+
+            <p><b>Задание:</b> Создайте вектор <code>position</code> со значениями (10, 20, 30). Добавьте к нему вектор (5, 5, 5) и выведите результат.</p>
+
+            <pre><code class="lang-lua">
+-- Ваш код здесь
+local position = Vector3.new(10, 20, 30)
+position = position + Vector3.new(5, 5, 5)
+print("New Position:", position)
+            </code></pre>
+        </div>
+
+        <!-- Пример 7: CFrame -->
+        <div class="explanation" id="cframe" role="article">
+            <h3>2.7 CFrame</h3>
+            <p>CFrame используется для работы с положением и поворотом объектов в 3D пространстве. Пример:</p>
+
+            <pre><code class="lang-lua">
+-- Пример инициализации CFrame
+local myCFrame = CFrame.new(0, 0, 0)
+
+-- Операции с CFrame
+local newCFrame = myCFrame * CFrame.Angles(0, math.rad(90), 0)
+
+print("New CFrame:", newCFrame)
+            </code></pre>
+
+            <p><b>Задание:</b> Создайте CFrame <code>myCFrame</code> с позицией (5, 10, 15). Поверните его на 45 градусов по оси Y и выведите результат.</p>
+
+            <pre><code class="lang-lua">
+-- Ваш код здесь
+local myCFrame = CFrame.new(5, 10, 15)
+myCFrame = myCFrame * CFrame.Angles(0, math.rad(45), 0)
+print("New CFrame:", myCFrame)
+            </code></pre>
+        </div>
+
+        <!-- Таблица типов данных -->
+        <div class="explanation" id="data-types" role="article">
+            <h3>3. Таблица типов данных Lua</h3>
+            <table>
+                <tr>
+                    <th>Тип данных</th>
+                    <th>Описание</th>
+                    <th>Ссылка на репозиторий</th>
+                </tr>
+                <tr>
+                    <td>Числа</td>
+                    <td>Целые и дробные числа.</td>
+                    <td><a href="https://github.com/PacktPublishing/Coding-Roblox-Games-Made-Easy-2nd-Edition/blob/main/Chapter03/NumberExamples.lua">Ссылка на репозиторий</a></td>
+                </tr>
+                <tr>
+                    <td>Логические значения (Boolean)</td>
+                    <td>Логические значения <code>true</code> или <code>false</code>.</td>
+                    <td><a href="https://github.com/PacktPublishing/Coding-Roblox-Games-Made-Easy-2nd-Edition/blob/main/Chapter03/BoolExamples.lua">Ссылка на репозиторий</a></td>
+                </tr>
+                <tr>
+                    <td>Строки</td>
+                    <td>Строки символов, заключённые в кавычки.</td>
+                    <td><a href="https://github.com/PacktPublishing/Coding-Roblox-Games-Made-Easy-2nd-Edition/blob/main/Chapter03/StringExamples.lua">Ссылка на репозиторий</a></td>
+                </tr>
+                <tr>
+                    <td>Таблицы</td>
+                    <td>Коллекции данных, индексируемые числами.</td>
+                    <td><a href="https://github.com/PacktPublishing/Coding-Roblox-Games-Made-Easy-2nd-Edition/blob/main/Chapter03/TableExamples.lua">Ссылка на репозиторий</a></td>
+                </tr>
+                <tr>
+                    <td>Словари (Dictionaries)</td>
+                    <td>Таблицы с ключами и значениями.</td>
+                    <td><a href="https://github.com/PacktPublishing/Coding-Roblox-Games-Made-Easy-2nd-Edition/blob/main/Chapter03/DictionaryExamples.lua">Ссылка на репозиторий</a></td>
+                </tr>
+                <tr>
+                    <td>Векторы (Vectors)</td>
+                    <td>Трёхмерные векторы для работы с направлениями и величинами.</td>
+                    <td><a href="https://github.com/PacktPublishing/Coding-Roblox-Games-Made-Easy-2nd-Edition/blob/main/Chapter03/VectorExamples.lua">Ссылка на репозиторий</a></td>
+                </tr>
+                <tr>
+                    <td>CFrame</td>
+                    <td>Положение и поворот объектов в 3D пространстве.</td>
+                    <td><a href="https://github.com/PacktPublishing/Coding-Roblox-Games-Made-Easy-2nd-Edition/blob/main/Chapter03/CFrameExamples.lua">Ссылка на репозиторий</a></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+{% endblock %}
+{% block design_selection %}
+    <div class="design-selection" id="design-selection">
+        <h3 class="select">Оглавление:</h3>
+        <nav role="navigation">
+            <ul>
+                <li>
+                    <a href="#lua-overview" class="design-name">1. Основные типы данных в Lua</a>
+                </li>
+                <li>
+                    <a href="#numbers" class="designer-name">2.1 Числа</a>
+                </li>
+                <li>
+                    <a href="#booleans" class="designer-name">2.2 Логические значения (Boolean)</a>
+                </li>
+                <li>
+                    <a href="#strings" class="designer-name">2.3 Строки</a>
+                </li>
+                <li>
+                    <a href="#tables" class="designer-name">2.4 Таблицы</a>
+                </li>
+                <li>
+                    <a href="#dictionaries" class="designer-name">2.5 Словари (Dictionaries)</a>
+                </li>
+                <li>
+                    <a href="#vectors" class="designer-name">2.6 Векторы (Vectors)</a>
+                </li>
+                <li>
+                    <a href="#cframe" class="designer-name">2.7 CFrame</a>
+                </li>
+                <li>
+                    <a href="#data-types" class="designer-name">3. Таблица типов данных Lua</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+{% endblock %}
+{% block footer %}
+{% endblock %}
+{% block aside %}
+{{ super() }}
+{% endblock %}
