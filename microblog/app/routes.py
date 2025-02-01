@@ -212,6 +212,9 @@ def coding_roblox():
 @app.route('/coding_roblox_page2')
 def coding_roblox_page2():
     return render_template('coding_roblox/page2.html')
+@app.route('/coding_roblox_page3')
+def coding_roblox_page3():
+    return render_template('coding_roblox/page3.html')
 
 @app.route('/scratch')
 def scratch_ed():
