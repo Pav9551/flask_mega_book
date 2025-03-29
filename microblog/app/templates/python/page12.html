@@ -1,0 +1,138 @@
+{% extends "python/base_zen_garden.html" %}
+
+{% block title %}
+Урок по Python - Создание слоя дерева с помощью эмодзи
+{% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+{% endblock %}
+
+{% block preamble %}
+<div class="preamble" id="intro" role="article">
+    <h3>1. Создание слоя дерева с помощью эмодзи</h3>
+    <p>В этом уроке мы исследуем операции с файлами в Python, создавая класс, который записывает слои деревьев, представленных эмодзи, в файл.</p>
+    <p>Это поможет визуализировать, как данные могут быть структурированы и сохранены, а также даст практику в работе с файлами в Python.</p>
+</div>
+{% endblock %}
+
+{% block main_supporting %}
+<div class="main supporting" id="class-introduction" role="main">
+    <div class="explanation" id="class-explanation" role="article">
+        <h3>2. Объяснение класса</h3>
+        <p>Класс <code>TreeLayer</code> инициализируется с именем файла. Он записывает определенные строки символов в этот файл, чтобы создать структуру, похожую на дерево.</p>
+    </div>
+    <div class="participation" id="initial-setup" role="article">
+        <h3>Шаг 1: Определение класса</h3>
+        <pre><code class="lang-python">
+class TreeLayer:
+    def __init__(self, filename):
+        self.file = filename
+        with open(self.file, 'w', encoding='utf-8') as f:
+            pass
+        </code></pre>
+    </div>
+    <div class="participation" id="write-string-a" role="article">
+        <h3>Шаг 2a: Метод write_string_a</h3>
+        <p>Метод <code>write_string_a</code> добавляет строку с символами "🟦🟦🟦🟦🍃🟦🟦🟦🟦" в файл, что представляет собой элемент слоя. Он вызывает <code>open</code> в режиме добавления ('a') с кодировкой 'utf-8'.</p>
+        <pre><code class="lang-python">
+    def write_string_a(self):
+        with open(self.file, 'a', encoding='utf-8') as f:
+            f.write("🟦🟦🟦🟦🍃🟦🟦🟦🟦\n")
+        </code></pre>
+    </div>
+    <div class="participation" id="write-string-C" role="article">
+        <h3>Шаг 2b: Метод write_string_C</h3>
+        <p>Метод <code>write_string_C</code> добавляет строку с символами "🍃🍃🍃🍃🌳🍃🍃🍃🍃" в файл, что представляет собой центральный элемент слоя дерева.</p>
+        <pre><code class="lang-python">
+    def write_string_C(self):
+        with open(self.file, 'a', encoding='utf-8') as f:
+            f.write("🍃🍃🍃🍃🌳🍃🍃🍃🍃\n")
+        </code></pre>
+    </div>
+    <div class="participation" id="write-string-g" role="article">
+        <h3>Шаг 2c: Метод write_string_g</h3>
+        <p>Метод <code>write_string_g</code> добавляет строку с символами "🟡🍃🍃🍃🌳🍃🍃🍃🍃" в файл, которая может быть использованием для представления другого слоя дерева с небольшим изменением эмодзи.</p>
+        <pre><code class="lang-python">
+    def write_string_g(self):
+        with open(self.file, 'a', encoding='utf-8') as f:
+            f.write("🟡🍃🍃🍃🌳🍃🍃🍃🍃\n")
+        </code></pre>
+    </div>
+    <div class="participation" id="write-clear" role="article">
+        <h3>Шаг 2d: Метод write_clear</h3>
+        <p>Метод <code>write_clear</code> добавляет пустую строку в файл, создавая визуальное разделение между слоями дерева.</p>
+        <pre><code class="lang-python">
+    def write_clear(self):
+        with open(self.file, 'a', encoding='utf-8') as f:
+            f.write("\n")
+        </code></pre>
+    </div>
+    <div class="participation" id="creating-layers" role="article">
+        <h3>Шаг 3: Создание слоя</h3>
+        <p>Метод <code>write_layer</code> вызывает методы строк в определенном порядке для создания слоя дерева.</p>
+        <pre><code class="lang-python">
+    def write_layer(self):
+        self.write_string_a()
+        self.write_string_a()
+        self.write_string_a()
+        self.write_string_a()
+        self.write_string_C()
+        self.write_string_a()
+        self.write_string_a()
+        self.write_string_a()
+        self.write_string_a()
+        self.write_string_a()
+        self.write_clear()
+        </code></pre>
+    </div>
+    <div class="participation" id="execution-example" role="article">
+        <h3>Шаг 4: Пример выполнения</h3>
+        <pre><code class="lang-python">
+tree = TreeLayer("t.txt")
+tree.write_layer()
+tree.write_layer()
+tree.write_layer()
+tree.write_layer()
+tree.write_layer()
+        </code></pre>
+    </div>
+</div>
+
+<div class="main supporting" id="growth-ideas" role="main">
+    <div class="explanation" id="growth-explanation" role="article">
+        <h3>3. Расширение функциональности</h3>
+        <p>Рассмотрите возможность расширения класса путем настройки эмодзи или структуры, чтобы представлять разные типы данных или визуализаций.</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block design_selection %}
+<div class="design-selection" id="design-selection">
+    <h3 class="select">Содержание:</h3>
+    <nav role="navigation">
+        <ul>
+            <li><a href="#intro" class="design-name">1. Создание слоя дерева с помощью эмодзи</a></li>
+            <li><a href="#class-introduction" class="designer-name">2. Объяснение класса</a></li>
+                <ul>
+                    <li><a href="#write-string-a">2a: Метод write_string_a</a></li>
+                    <li><a href="#write-string-C">2b: Метод write_string_C</a></li>
+                    <li><a href="#write-string-g">2c: Метод write_string_g</a></li>
+                    <li><a href="#write-clear">2d: Метод write_clear</a></li>
+                </ul>
+            <li><a href="#growth-ideas" class="designer-name">3. Расширение функциональности</a></li>
+        </ul>
+    </nav>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block aside %}
+{{ super() }}
+{% endblock %}

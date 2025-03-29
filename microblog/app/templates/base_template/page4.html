@@ -1,0 +1,124 @@
+{% extends "base_zen_garden.html" %}
+{% block title %}template{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block body %}
+{{ super() }}
+{% endblock %}
+{% block preamble %}
+		<div class="preamble" id="environment" role="article">
+			<h3>10. Вложенные циклы 3-го уровня и эфект дыма. Создание облака</h3>
+			<p>Для того, чтобы создать облако, необходимо создать новый объект Script в службе ServerScriptService. Кнопка "+" в окне Explorer справа от службы, поменять имя объекта на Script_fog (свойство Name)
+			и добавить строчки кода:</p>
+			<pre><code class="lang-js">
+-- Создание папки для хранения блоков
+local partsFolder = Instance.new("Folder")
+partsFolder.Name = "Parts"
+partsFolder.Parent = workspace
+
+-- Параметры матрицы
+local rows = 5
+local cols = 5
+-- Количество матриц (этажей)
+local height = 5
+local spacing = 5 -- расстояние между частями
+-- Создание матриц частей
+for i = 1, rows do
+	for j = 1, cols do
+		for k = 1, height do
+			local part = Instance.new("Part")
+			part.Size = Vector3.new(4, 1, 4) -- размер части
+			part.Position = Vector3.new(10, 100, 10) + Vector3.new((j - 1) * (part.Size.X + spacing), k * (part.Size.Y + spacing), (i - 1) * (part.Size.Z + spacing)) -- позиция части
+			part.Anchored = true -- зафиксировать часть на месте
+			part.Parent = game.Workspace.Parts -- добавить часть в игровое пространство
+			part.Transparency = 1.0
+			part.CanCollide = false
+			local smoke = Instance.new("Smoke", part)
+			smoke.Color = Color3.fromRGB(100, 100, 100)-- цвет дыма серый
+			smoke.Opacity = 0.7 --прозрачность
+			smoke.RiseVelocity = 2 --скорость образования
+			smoke.Size = 5.5 --размер
+		end
+	end
+end
+-- Создание папки для хранения пауков
+			</code></pre>
+			<p>Запустите игру и через несколько секунд в небе сформируется облако серого цвета</p>
+			</div>
+{% endblock %}
+{% block main_supporting %}
+	<div class="main supporting" id="introduction" role="main">
+		<div class="explanation" id="moving" role="article">
+			<h3>11. Создание тучи с освежающим дождем из пауков.</h3>
+			<p>Добавьте модель Enemy Spider из Toolbox на наше рабочее пространство(Workspace) и переместите его в службу ReplicatedStorage, меняя свойство Parent</p>
+			<p>Добавьте строчки кода, отвечающие за создание пауков из скрипта <a href="/page3#zen-participation" >пункта 9.</a> </p>
+			<p>Вы можете эсперементировать с кодом, меняя параметры матрицы и время клонирования пауков. Поменяйте в коде время клонирования пауков на 100 секунд (перед бесконечным циклом While)</p>
+	<pre><code class="lang-js">
+local spawn_time = 100 --период через который появляются новые пауки в секундах
+	</code></pre>
+		</div>
+		<div class="participation" id="zen-participation" role="article">
+			<h3>12 Отключаем укусы и реинкарнацию пауков.</h3>
+			<h3>12.1 Укусы</h3>
+			<p>Для отключения укуса паука необходимо закомментировать строчку скрипта, которая присоединяет событие прикосновения паука к фунции атаки паука:</p>
+			<p>В окне explorer найдите службу ReplicatedStorage, а в ней модель Enemy Spider. Скрипт отвечающий за атаку паука Damage - находится в брюшке паука (Torso). Полный путь к скрипту выглядит так:</p>
+			<p>ReplicatedStorage->Enemy Spider->Torso->Damage. Для отключения укуса паука закомментируйте последнюю строчку скрипта Damage</p>
+	<pre><code class="lang-js">
+-- script.Parent.Touched:connect(onTouched)
+	</code></pre>
+			<p>Функции - очень важная часть синтаксиса языка программирования, которая позволяет избежать дублирования и сделать код более читаемым, например:</p>
+	<pre><code class="lang-js">
+local function greetUser(name)
+	print("Hello, " .. name .. "!")
+end
+greetUser("Zenva")  -- Output: Hello, Zenva!
+	</code></pre>
+			<h3>12.2 Реинкарнация пауков</h3>
+			<p>Для отключения реинкарнации паука необходимо закомментировать строчки скрипта ReplicatedStorage->Enemy Spider->Respawn, отвечающие за кланирование:</p>
+	<pre><code class="lang-js">
+--name="Humanoid"
+
+local robo=script.Parent:clone()
+
+while true do
+	wait(10)
+	if script.Parent.Humanoid.Health<1 then
+		wait(math.random(10,15))
+		--robot=robo:clone()
+		--robot.Parent=script.Parent.Parent
+		--robot:makeJoints()
+		script.Parent:Destroy()
+	end
+end
+	</code></pre>
+			<p>Так мы уменьшим скорость воспроизводства пауков</p>
+		</div>
+	</div>
+{% endblock %}
+{% block design_selection %}
+			<div class="design-selection" id="design-selection">
+				<h3 class="select">День четвертый:</h3>
+				<nav role="navigation">
+					<ul>
+					<li>
+						<a href="#environment" class="design-name" >10. Вложенные циклы 3-го уровня и эфект дыма.</a>
+					</li>
+					<li>
+						<a href="#moving" class="designer-name">11. Создание тучи с освежающим дождем из пауков.</a>
+					</li>
+					<li>
+						<a href="#zen-participation" class="design-name">12. Отключаем укусы и реинкарнацию пауков.</a>
+					</li>
+					</ul>
+				</nav>
+			</div>
+
+{% endblock %}
+{% block footer %}
+
+{% endblock %}
+{% block aside %}
+{{ super() }}
+{% endblock %}
+

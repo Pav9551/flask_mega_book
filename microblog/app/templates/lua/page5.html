@@ -1,0 +1,154 @@
+{% extends "lua/base_zen_garden.html" %}
+
+{% block title %}
+Создание блоков: пошаговое руководство
+{% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+{% endblock %}
+
+{% block preamble %}
+<div class="preamble" id="environment" role="article">
+    <h3>Пошаговое создание блоков</h3>
+    <p>В этом уроке мы изучим, как создать объекты в игровом мире шаг за шагом, начиная от клонирования одного блока до генерации полной матрицы блоков. Урок разбит на три части.</p>
+</div>
+{% endblock %}
+
+{% block main_supporting %}
+<div class="main supporting" id="introduction" role="main">
+
+    <div class="explanation" id="single-clone-creation" role="article">
+        <h3>Часть 1: Создание одного клона</h3>
+        <p>На первом этапе мы создадим один клон объекта из `ReplicatedStorage` и разместим его в игровом пространстве.</p>
+
+        <h4>Код</h4>
+        <pre><code class="lang-lua">
+-- Создание папки для хранения клонов
+local partsFolder = Instance.new("Folder")
+partsFolder.Name = "Parts"
+partsFolder.Parent = workspace
+-- Клонируем блок
+local block = game.ReplicatedStorage['Kill brick']:Clone()
+-- Кладем в папку Parts
+block.Parent = partsFolder
+-- Устанавливаем позицию блока
+block.Position = Vector3.new(10, 0, 10)
+        </code></pre>
+
+        <p>Запустите игру, чтобы убедиться, что блок появляется в указанной позиции.</p>
+    </div>
+
+    <div class="explanation" id="row-creation" role="article">
+        <h3>Часть 2: Создание строки клонов</h3>
+        <p>Теперь мы создадим строку из нескольких клонов, используя цикл для позиционирования каждого блока в ряд.</p>
+
+        <h4>Код</h4>
+        <pre><code class="lang-lua">
+-- Создание папки для хранения блоков
+local partsFolder = Instance.new("Folder")
+partsFolder.Name = "Parts"
+partsFolder.Parent = workspace
+-- Параметры строки
+local numParts = 10 -- количество частей в строке
+local spacing = 10 -- расстояние между частями
+local size = 10 -- размер части
+-- Создание строки частей
+for j = 1, numParts do
+	Position = Vector3.new(10, 0, 10) + Vector3.new((j - 1) * (size + spacing), 0, 0) -- позиция части
+	local Spider = game.ReplicatedStorage['Kill brick']:Clone()
+	Spider.Parent = partsFolder -- помещаем его папку в Workspace.Parts (появляется на карте)
+	Spider.Position = Position + Vector3.new(0,3,0)
+end
+        </code></pre>
+
+        <p>Запустите игру, чтобы увидеть строку из 10 блоков, расположенных рядом друг с другом.</p>
+    </div>
+
+    <div class="explanation" id="matrix-creation" role="article">
+        <h3>Часть 3: Создание матрицы блоков</h3>
+        <p>В завершение мы создадим полную матрицу блоков, используя двойной цикл для позиционирования блоков в рядах и столбцах.</p>
+
+        <h4>Код</h4>
+        <pre><code class="lang-lua">
+-- Создание папки для хранения блоков
+local partsFolder = Instance.new("Folder")
+partsFolder.Name = "Parts"
+partsFolder.Parent = workspace
+
+-- Параметры матрицы
+local rows = 10
+local cols = 10
+local spacing = 10 -- расстояние между частями
+local size = 10 -- размер матрицы
+
+-- Создание матрицы частей
+for i = 1, rows do
+	for j = 1, cols do
+		Position = Vector3.new(10, 0, 10) + Vector3.new((j - 1) * (size + spacing), 0, (i - 1) * (size + spacing)) -- позиция части
+		local Spider = game.ReplicatedStorage['Kill brick']:Clone()
+		Spider.Parent = partsFolder -- помещаем его папку в Workspace.Parts (появляется на карте)
+		Spider.Position = Position + Vector3.new(0,3,0)
+	end
+end
+        </code></pre>
+
+        <p>Запустите игру, чтобы увидеть, как генерируются блоки, образуя полную матрицу.</p>
+    </div>
+	    <div class="explanation" id="random" role="article">
+        <h3>Часть 4: Создание случайного перемещения блоков</h3>
+        <p>Можно менять код.</p>
+
+        <h4>Код</h4>
+        <pre><code class="lang-lua">
+-- Функция для генерации случайной горизонтальной позиции
+local function getRandomHorizontalPosition()
+	local randomX = math.random(-10, 10)  -- Случайное изменение по оси X
+	local randomZ = math.random(-10, 10)  -- Случайное изменение по оси Z
+	return Vector3.new(randomX, 0, randomZ)
+end
+
+course = getRandomHorizontalPosition()
+
+-- Цикл бесконечного перемещения блока
+while true do
+	-- Устанавливаем новую цель позиции на основе случайного смещения
+	alignPosition.Position = part.Position + course
+	wait(1)
+	alignPosition.Position = part.Position - course
+	wait(1)
+end
+        </code></pre>
+
+        <p>Запустите игру, чтобы увидеть, как генерируются блоки, образуя полную матрицу.</p>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block design_selection %}
+<div class="design-selection" id="design-selection">
+    <h3 class="select">Оглавление:</h3>
+    <nav role="navigation">
+        <ul>
+            <li><a href="#single-clone-creation" class="design-name">Создание одного клона</a></li>
+            <li><a href="#row-creation" class="designer-name">Создание строки клонов</a></li>
+            <li><a href="#matrix-creation" class="designer-name">Создание матрицы блоков</a></li>
+        </ul>
+    </nav>
+</div>
+{% endblock %}
+
+{% block footer %}
+<div class="footer">
+    <p>Спасибо за прохождение этого урока! Теперь вы обладаете навыками по созданию и позиционированию объектов в игровом мире. Экспериментируйте с различными размерами, расстояниями и формами!</p>
+</div>
+{% endblock %}
+
+{% block aside %}
+{{ super() }}
+{% endblock %}

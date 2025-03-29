@@ -1,0 +1,119 @@
+{% extends "python/base_zen_garden.html" %}
+{% block title %}Занятие по Python{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block body %}
+{{ super() }}
+{% endblock %}
+{% block preamble %}
+		<div class="preamble" id="environment" role="article">
+			<h3>1. Введение в Python для начинающих</h3>
+			<p>Python — это простой и мощный язык программирования, который используется для создания игр, веб-сайтов и даже научных проектов. Сегодня мы начнем изучать его основы!</p>
+			<p>Первое, что нужно знать о Python — это то, что он очень легко читается. Давайте разберем несколько простых примеров.</p>
+		</div>
+{% endblock %}
+{% block main_supporting %}
+	<div class="main supporting" id="introduction" role="main">
+		<div class="explanation" id="zen-explanation" role="article">
+			<h3>2.1 Первые шаги с Python</h3>
+			<p>Для начала давайте напишем простую программу, которая выведет сообщение на экран. Это делается с помощью команды <code>print()</code>.</p>
+
+			<pre><code class="lang-python">
+# Ваш первый Python-код!
+print("Привет, мир!")
+			</code></pre>
+
+			<p>Запустите эту программу, и вы увидите сообщение "Привет, мир!" на экране.</p>
+		</div>
+
+		<div class="participation" id="zen-participation" role="article">
+			<h3>2.2 Задание 1: Придумай свое сообщение</h3>
+			<p>Измените программу так, чтобы она выводила ваше имя или любимую фразу вместо "Привет, мир!". Для этого просто замените текст внутри кавычек.</p>
+
+			<pre><code class="lang-python">
+# Пример:
+print("Меня зовут Алиса, и я учусь программировать!")
+			</code></pre>
+
+			<p>Теперь программа выведет ваше сообщение! Попробуйте разные варианты.</p>
+		</div>
+	</div>
+
+	<div class="main supporting" id="variables" role="main">
+
+
+		<div class="participation" id="zen-participation" role="article">
+			<h3>Задание 2: Знакомство с ветвлениями</h3>
+			<p>Ветвления позволяют выполнять определенные участки кода в зависимости от условий. Например:</p>
+
+			<pre><code class="lang-python">
+import random
+# Генерация случайной температуры
+t = random.randint(15, 30)
+print("Температура:", t, " градусов")
+# Проверка условий и вывод рекомендаций
+if t > 25:
+    print("Температура слишком высокая! Включаем кондиционер.")
+elif t < 18:
+    print("Температура слишком низкая! Включаем обогреватель.")
+else:
+    print("Температура комфортная, ничего менять не нужно.")
+			</code></pre>
+			<p>Можете разнообразить ветвления не забывайте про отступы</p>
+		</div>
+	</div>
+
+	<div class="main supporting" id="loops" role="main">
+		<div class="explanation" id="zen-explanation" role="article">
+			<h3>2.4 Знакомство с циклами</h3>
+			<p>Циклы позволяют повторять действия несколько раз. Например, с помощью цикла мы можем 5 раз напечатать одну и ту же фразу:</p>
+
+			<pre><code class="lang-python">
+# Пример цикла
+for i in range(5):
+    print("Программировать - это круто!")
+			</code></pre>
+
+			<p>Эта программа напечатает сообщение "Программировать - это круто!" 5 раз. Попробуйте изменить количество повторений.</p>
+		</div>
+
+		<div class="participation" id="zen-participation" role="article">
+			<h3>Задание 3: Таблица умножения</h3>
+			<p>Напишите программу, которая с помощью цикла выводит таблицу умножения для числа 3:</p>
+
+			<pre><code class="lang-python">
+# Таблица умножения для 3
+for i in range(1, 11):
+    print("3 *", i, "=", 3 * i)
+			</code></pre>
+
+			<p>Когда вы запустите программу, она выведет таблицу умножения для числа 3.</p>
+		</div>
+	</div>
+
+
+
+{% endblock %}
+
+
+{% block design_selection %}
+	<div class="design-selection" id="design-selection">
+		<h3 class="select">Оглавление:</h3>
+		<nav role="navigation">
+			<ul>
+				<li><a href="#environment" class="design-name">1. Введение в Python</a></li>
+				<li><a href="#introduction" class="designer-name">2. Первые шаги с Python</a></li>
+				<li><a href="#variables" class="designer-name">3. Знакомство с ветвлениями</a></li>
+				<li><a href="#loops" class="designer-name">4. Циклы</a></li>
+
+			</ul>
+		</nav>
+	</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+{% block aside %}
+{{ super() }}
+{% endblock %}

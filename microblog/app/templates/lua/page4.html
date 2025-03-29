@@ -1,0 +1,86 @@
+{% extends "lua/base_zen_garden.html" %}
+{% block title %}Блок следует за игроком{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block body %}
+{{ super() }}
+{% endblock %}
+{% block preamble %}
+		<div class="preamble" id="environment" role="article">
+			<h3>5. Создание блока, который следует за игроком</h3>
+			<p>Для того чтобы блок следовал за игроком, необходимо использовать компоненты, которые позволяют отслеживать и выравнивать позицию блока относительно игрока:</p>
+			<p>AlignPosition(Выравнивание позиции) - это компонент, который позволяет выравнивать позицию одного объекта относительно другого, в данном случае блока относительно игрока;</p>
+			<p>AlignOrientation(Выравнивание ориентации) - это компонент, который позволяет выравнивать ориентацию (поворот) блока относительно игрока, стабилизируя его положение;</p>
+			<p>Attachment(Присоединение) - необходим для работы AlignPosition и AlignOrientation.</p>
+			<p>Эти компоненты позволяют создать блок, который будет следовать за игроком.</p>
+		</div>
+{% endblock %}
+{% block main_supporting %}
+	<div class="main supporting" id="introduction" role="main">
+		<div class="explanation" id="following" role="article">
+			<h3>6 Создание блока, который следует за игроком</h3>
+			<p>Для того, чтобы блок следовал за игроком, необходимо создать новый объект Script внутри блока. Кнопка "+" в окне Explorer справа от блока, поменять имя объекта на Script_follow (свойство Name)
+			и добавить следующий код:</p>
+
+			<pre><code class="lang-lua">
+local Players = game:GetService("Players")
+
+-- это событие, которое срабатывает, когда новый игрок присоединяется к игре.
+Players.PlayerAdded:Connect(function(player)
+	-- это событие, которое срабатывает, когда персонаж игрока загружается в игровом мире.
+	player.CharacterAdded:Connect(function(character)
+		local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+		while humanoidRootPart do
+			print(player.Name,"is at",tostring(humanoidRootPart.Position))
+			part.AlignPosition.Position = humanoidRootPart.Position
+			wait(2)
+		end
+	end)
+end)
+
+			</code></pre>
+		</div>
+	</div>
+	<p>Запустите игру, и блок будет следовать за игроком.</p>
+		<div class="preamble" id="environment" role="article">
+			<h3>7. Декорируем блок. Добавляем эфект огня. Создаем шаровую молнию</h3>
+			<p>Добавьте к блоку эфект огня в окне Explorer  и установите прозрачность блока - 100% в окне Prorerties</p>
+            <h3>Таблица 1. Свойство прозрачности блока</h3>
+		<table>
+		  <tr>
+			<th>Свойство</th>
+			<th>Значение</th>
+			<th>Примечание</th>
+		  </tr>
+		  <tr>
+			<td>transparency</td>
+			<td>100</td>
+			<td>Невидимый</td>
+		  </tr>
+		</table>
+
+			<h3>Для создания объектов AlignPosition(Выравнивание позиции), AlignOrientation(Выравнивание ориентации) и  Attachment(Присоединение) применяйте код из занятия 3 или создавайте вручную.</h3>
+		</div>
+{% endblock %}
+{% block design_selection %}
+			<div class="design-selection" id="design-selection">
+				<h3 class="select">Оглавление:</h3>
+				<nav role="navigation">
+					<ul>
+						<li>
+							<a href="#environment" class="design-name">4. Объекты моделирования физики</a>
+						</li>
+						<li>
+							<a href="#following" class="designer-name">5. Создание блока, который следует за игроком</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+{% endblock %}
+{% block footer %}
+
+{% endblock %}
+{% block aside %}
+{{ super() }}
+{% endblock %}

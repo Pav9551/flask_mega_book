@@ -1,0 +1,113 @@
+{% extends "python/base_zen_garden.html" %}
+
+{% block title %}
+Занятие по Python – Взаимодействие с Minecraft через эмодзи
+{% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+{% endblock %}
+
+{% block preamble %}
+<div class="preamble" id="minecraft_interaction" role="article">
+    <h3>1. Взаимодействие с Minecraft через эмодзи</h3>
+    <p>Сегодня мы создадим программу на Python, которая взаимодействует с Minecraft, используя сетки эмодзи для построения блоков в игре. Это позволяет визуализировать данные в Minecraft, используя эмодзи как строительные блоки.</p>
+</div>
+{% endblock %}
+
+{% block main_supporting %}
+<div class="main supporting" id="function_description" role="main">
+    <div class="explanation" id="function-explanation" role="article">
+        <h3>2.1 Описание взаимодействия с Minecraft</h3>
+        <p>Программа использует библиотеку <code>mcpi</code> для взаимодействия с Minecraft и функции из модуля <code>emoji_module</code> для создания и загрузки сеток эмодзи.</p>
+    </div>
+    <div class="participation" id="function-setup" role="article">
+        <h3>Шаг 1: Импорт необходимых модулей</h3>
+        <p>Убедитесь, что у вас установлены библиотеки <code>mcpi</code> и <code>emoji_module</code>.</p>
+        <pre><code class="lang-python">
+from mcpi.minecraft import Minecraft
+from mcpi import block
+from emoji_module import emoji_grid, emoji_dict, load_maps_from_file, emoji
+        </code></pre>
+    </div>
+    <div class="participation" id="function-setup" role="article">
+        <h3>Шаг 2: Создание и загрузка сеток эмодзи</h3>
+        <p>Создаем и загружаем сетки эмодзи из файла.</p>
+        <pre><code class="lang-python">
+emoji_grid()
+emoji()
+maps = load_maps_from_file()
+        </code></pre>
+    </div>
+    <div class="participation" id="function-setup" role="article">
+        <h3>Шаг 3: Вывод информации о картах</h3>
+        <p>Выводим информацию о загруженных картах в консоль.</p>
+        <pre><code class="lang-python">
+print("все карты:")
+print(maps)
+print("первая карта:")
+print(maps[0])
+print("первая карта, первая строка:")
+print(maps[0][0])
+print("первая карта -> первая строка -> первый символ:")
+print(maps[0][0][0])
+        </code></pre>
+    </div>
+    <div class="participation" id="function-setup" role="article">
+        <h3>Шаг 4: Взаимодействие с Minecraft</h3>
+        <p>Используем загруженные карты для построения блоков в Minecraft.</p>
+        <pre><code class="lang-python">
+mc = Minecraft.create()
+position = mc.player.getTilePos()
+start_x = position.x
+start_y = position.y
+start_z = position.z
+
+for y, map in enumerate(maps):
+    for z, line in enumerate(map):
+        for x, simbol in enumerate(line):
+            block_id = emoji_dict[ord(simbol)]
+            mc.setBlock(start_x + x, start_y + y, start_z + z - 3, block_id)
+        </code></pre>
+    </div>
+</div>
+
+<div class="main supporting" id="execution_logic" role="main">
+    <div class="participation" id="execution-example" role="article">
+        <h3>Задание 1: Основная логика выполнения</h3>
+        <p>Основная функция загружает сетки из файла и строит их в Minecraft, используя соответствующие блоки.</p>
+    </div>
+</div>
+
+<div class="main supporting" id="expansion" role="main">
+    <div class="explanation" id="expansion-explanation" role="article">
+        <h3>3. Расширение функций</h3>
+        <p>Вы можете дополнить функциональность, добавляя новые типы эмодзи, изменяя размеры сеток или интегрируя другие источники данных для загрузки.</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block design_selection %}
+<div class="design-selection" id="design-selection">
+    <h3 class="select">Оглавление:</h3>
+    <nav role="navigation">
+        <ul>
+            <li><a href="#minecraft_interaction" class="design-name">1. Взаимодействие с Minecraft через эмодзи</a></li>
+            <li><a href="#function_description" class="designer-name">2. Описание взаимодействия с Minecraft</a></li>
+            <li><a href="#execution_logic" class="designer-name">3. Основная логика выполнения</a></li>
+            <li><a href="#expansion" class="designer-name">4. Расширение функций</a></li>
+        </ul>
+    </nav>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block aside %}
+{{ super() }}
+{% endblock %}

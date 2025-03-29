@@ -1,0 +1,187 @@
+{% extends "python/base_zen_garden.html" %}
+
+{% block title %}
+Урок по Python - Основы синтаксиса с эмодзи
+{% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+{% endblock %}
+
+{% block preamble %}
+<div class="preamble" id="intro" role="article">
+    <h3>1. Скачать шаблон</h3>
+    <p>В первой части этого урока мы начнем с загрузки шаблона проекта. Скопируйте репозиторий с помощью команды:</p>
+    <pre><code>git clone https://github.com/Pav9551/flask_ed_template/</code></pre>
+</div>
+{% endblock %}
+
+{% block main_supporting %}
+<div class="main supporting" id="python-introduction" role="main">
+
+    <div class="explanation" id="routes-explanation" role="article">
+        <h3>2. Добавить в routes.py</h3>
+        <p>Теперь добавьте следующий код в ваш файл <code>routes.py</code>, чтобы создать маршрут для веб-страницы:</p>
+        <pre><code class="lang-python">
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    message = "жми"
+    symbols = ("", "🤗", "")
+    if request.method == 'POST':
+        symbols = spin()
+        message, multiplier = check_win(symbols[0],symbols[1],symbols[2])
+    return render_template('index.html', message=message, symbols=symbols)
+        </code></pre>
+    </div>
+
+    <div class="explanation" id="html-explanation" role="article">
+        <h3>3. HTML-код для индексной страницы</h3>
+        <p>В следующем коде показано, как создать HTML-страницу для интерфейса слот-машины:</p>
+        <a href="https://github.com/Pav9551/flask_ed_template/blob/master/microblog/app/templates/index.html" target="_blank">
+        Ссылка на полную версию
+        </a>
+        <pre><code class="lang-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;ru&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Слот-машина&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Волшебные Слоты&lt;/h1&gt;
+&lt;div class=&quot;slogan&quot;&gt;Пусть ощущения переполняют каждое вращение!&lt;/div&gt;
+&lt;div class=&quot;slot-machine&quot;&gt;
+&lt;form method=&quot;post&quot;&gt;
+&lt;button type=&quot;submit&quot;&gt;Крутить барабаны&lt;/button&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+        </code></pre>
+    </div>
+
+    <div class="explanation" id="css-explanation" role="article">
+        <h3>4. CSS для оформления</h3>
+        <pre><code class="lang-css">
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+h1 {
+    color: #ffffff;
+    background: linear-gradient(90deg, #ff7e5f, #feb47b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 3em;
+    margin-bottom: 5px;
+}
+
+.slogan {
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.slot-machine {
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.symbols {
+    font-size: 3em;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.symbols div {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #ececec;
+    width: 60px;
+    text-align: center;
+    margin: 0 10px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+p {
+    font-size: 1.2em;
+    color: #555;
+    margin: 0;
+}
+        </code></pre>
+    </div>
+
+    <div class="explanation" id="css-application" role="article">
+        <h3>5. Описание применения стилей CSS</h3>
+        <p>В этом разделе объясняется, как и зачем были применены стили CSS для проекта слот-машины:</p>
+        <ul>
+            <li><strong>body:</strong> Используется гибкая верстка для выравнивания контента по центру, создавая эстетичную вертикальную ориентацию и устанавливая фон.</li>
+            <li><strong>h1:</strong> Градиентный текст делает заголовок ярким и привлекательным, создавая эффект выделения.</li>
+            <li><strong>.slogan:</strong> Установлены более мягкие цвета и италик для создания контраста с заголовком и добавления стиля.</li>
+            <li><strong>.slot-machine:</strong> Округленные углы и тени добавляют трехмерный визуальный эффект, выделяя слот-машину из остального содержимого.</li>
+            <li><strong>.symbols:</strong> Крупные шрифты и форматирование по центру подчеркивают значимость отображаемых символов.</li>
+            <li><strong>.symbols div:</strong> Стиль отдельных символов для ясности и разделения между ними, используя различные фоны и скругленные границы.</li>
+            <li><strong>button:</strong> Чистый дизайн с активными цветовыми изменениями при наведении курсора, чтобы сделать пользовательский интерфейс интерактивным.</li>
+            <li><strong>p:</strong> Соответствие шрифтов общей стилистике с акцентом на видимость текста.</li>
+        </ul>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block design_selection %}
+<div class="design-selection" id="design-selection">
+    <h3 class="select">Содержание:</h3>
+    <nav role="navigation">
+        <ul>
+            <li><a href="#intro" class="design-name">1. Скачать шаблон</a></li>
+            <li><a href="#routes-explanation" class="designer-name">2. Добавить в routes.py</a></li>
+            <li><a href="#html-explanation" class="designer-name">3. HTML-код для индексной страницы</a></li>
+            <li><a href="#css-explanation" class="designer-name">4. CSS для оформления</a></li>
+            <li><a href="#css-application" class="designer-name">5. Описание применения стилей CSS</a></li>
+        </ul>
+    </nav>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block aside %}
+{{ super() }}
+{% endblock %}

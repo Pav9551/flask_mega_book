@@ -1,0 +1,99 @@
+{% extends "lua/base_zen_garden.html" %}
+
+{% block title %}
+Создание Матрицы Частей
+{% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+{% endblock %}
+
+{% block preamble %}
+<div class="preamble" id="environment" role="article">
+    <h3>Создание Матрицы Частей</h3>
+    <p>В этой инструкции мы создадим матрицу частей (блоков) в игровом пространстве Roblox с использованием кода на Lua.</p>
+</div>
+{% endblock %}
+
+{% block main_supporting %}
+<div class="main supporting" id="introduction" role="main">
+    <div class="explanation" id="matrix-creation" role="article">
+        <h3>Код для Создания Матрицы Частей</h3>
+        <pre><code class="lang-lua">
+-- Создание папки для хранения блоков
+local partsFolder = Instance.new("Folder")
+partsFolder.Name = "Parts"
+partsFolder.Parent = workspace
+
+-- Параметры матрицы
+local rows = 10
+local cols = 10
+
+-- Создание матрицы частей
+for i = 1, rows do
+    for j = 1, cols do
+        local part = Instance.new("Part")
+        part.Position = Vector3.new(10, 10, 10) + Vector3.new((j - 1) * (part.Size.X), 0, (i - 1) * (part.Size.Z))
+        part.Anchored = true
+        part.Parent = game.Workspace.Parts
+    end
+end
+</code></pre>
+    </div>
+
+    <div class="explanation" id="additional-points" role="article">
+        <h3>Дополнительные возможности</h3>
+        <p>Следующие строчки кода реализуют дополнительные функции:</p>
+        <ol>
+            <li>Настройка материала:</li>
+            <pre><code class="lang-lua">local part = game.ReplicatedStorage['Union']:Clone()</code></pre>
+
+            <li>Генерация случайного вращения:</li>
+            <pre><code class="lang-lua">
+-- Генерация случайных углов в радианах
+local angles = {0, math.pi/2, math.pi, 3*math.pi/2}
+local r = math.random(1, #angles)
+-- Установка случайного вращения для части
+part.CFrame = CFrame.Angles(0, angles[r], 0)
+</code></pre>
+
+            <li>Удаление части с вероятностью:</li>
+            <pre><code class="lang-lua">
+if math.random(1, 6) > 5 then
+    part:Remove()
+end
+</code></pre>
+        </ol>
+    </div>
+
+    <div class="explanation" id="use-part-color" role="article">
+        <h3>Свойство UsePartColor в Roblox</h3>
+        <p>Свойство <code>UsePartColor</code> в Roblox определяет, будет ли текстура объекта подстраиваться под цвет, установленный для части. Это позволяет использовать одну и ту же текстуру для разных частей, сохраняя их уникальные цветовые схемы.</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block design_selection %}
+<div class="design-selection" id="design-selection">
+    <h3 class="select">Оглавление:</h3>
+    <nav role="navigation">
+        <ul>
+            <li><a href="#environment" class="design-name">Введение</a></li>
+            <li><a href="#matrix-creation" class="designer-name">Создание матрицы частей</a></li>
+            <li><a href="#additional-points" class="design-name">Дополнительные возможности</a></li>
+            <li><a href="#use-part-color" class="design-name">Свойство UsePartColor</a></li>
+        </ul>
+    </nav>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block aside %}
+{{ super() }}
+{% endblock %}

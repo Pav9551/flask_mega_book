@@ -1,0 +1,60 @@
+{% extends "scratch/base_zen_garden.html" %}
+{% block title %}Scratch Programming Lesson{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block body %}
+{{ super() }}
+{% endblock %}
+{% block preamble %}
+<div class="preamble" id="environment" role="article">
+<h3>1. Introduction to Scratch</h3>
+<p>Scratch is a visual programming language that makes it easy to create interactive stories, games, and animations. In this lesson, we'll explore the basics of Scratch programming!</p>
+<p>You'll use the Scratch editor to build and test your projects.</p>
+</div>
+{% endblock %}
+{% block main_supporting %}
+<div class="main supporting" id="introduction" role="main">
+<div class="explanation" id="zen-explanation" role="article">
+<h3>2.1 Getting Started with Scratch</h3>
+<p>Here's a script that demonstrates cloning and movement:</p>
+<pre><code class="lang-scratch">
+### Script 1: Main Sprite
+- **When I receive [start]**
+  - Hide
+  - Set [score] to (0)
+  - Show variable [score]
+  - Forever
+    - Create clone of [myself]
+    - Wait (1.5) seconds
+
+### Script 2: Clone
+- **When I start as a clone**
+  - Show
+  - Switch costume to [pick random (1) to (10)]
+  - Go to x: (212) y: (-4)
+  - Glide (1.5) secs to x: (-350) y: (-4)
+  - If <touching [edge]?> then
+    - Change [score] by (1)
+    - Delete this clone
+</code></pre>
+<p>This script creates clones that move across the screen and increase the score when they reach the edge.</p>
+</div>
+</div>
+{% endblock %}
+{% block design_selection %}
+<div class="design-selection" id="design-selection">
+<h3 class="select">Table of Contents:</h3>
+<nav role="navigation">
+<ul>
+<li><a href="#environment" class="design-name">1. Introduction to Scratch</a></li>
+<li><a href="#introduction" class="designer-name">2. Getting Started with Scratch</a></li>
+</ul>
+</nav>
+</div>
+{% endblock %}
+{% block footer %}
+{% endblock %}
+{% block aside %}
+{{ super() }}
+{% endblock %}

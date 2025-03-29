@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Слот-машина</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>Волшебные Слоты</h1>
+    <div class="slogan">Пусть ощущения переполняют каждое вращение!</div>
+    <div class="slot-machine">
+        <form method="post">
+            <button type="submit">Крутить барабаны</button>
+        </form>
+
+        {% if symbols %}
+        <div class="symbols">
+            <div>{{ symbols[0] }}</div>
+            <div>{{ symbols[1] }}</div>
+            <div>{{ symbols[2] }}</div>
+        </div>
+        {% endif %}
+
+        {% if message %}
+        <p>{{ message }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,151 @@
+{% extends "python/base_zen_garden.html" %}
+
+{% block title %}Занятие по Python – Однорукий бандит с системой ставок и возможностью сохранения баланса{% endblock %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block body %}
+    {{ super() }}
+{% endblock %}
+
+{% block preamble %}
+<div class="preamble" id="slot_machine" role="article">
+    <h3>1. Создание "Однорукого бандита" с системой ставок и сохранением баланса</h3>
+    <p>Сегодня мы расширим нашу игру "Однорукий бандит" и добавим систему ставок и возможность сохранения. Это сделает игру более увлекательной, так как теперь игрок сможет делать ставки и выигрывать монеты в зависимости от результата.</p>
+</div>
+{% endblock %}
+
+{% block main_supporting %}
+<div class="main supporting" id="game_description" role="main">
+    <div class="explanation" id="game-explanation" role="article">
+        <h3>2.1 Описание игры со ставками</h3>
+        <p>В этой версии игры у игрока есть баланс монет. Перед каждым вращением игрок делает ставку. Если все символы совпадают, игрок выигрывает. В зависимости от символов, выпавших на барабанах, выигрыш может быть разным. Если символы не совпадают, игрок теряет ставку.</p>
+    </div>
+
+    <div class="participation" id="game-setup" role="article">
+        <h3>2.2 Настройка игры</h3>
+        <p>Сначала давайте обновим наш код для добавления начального баланса и системы ставок.</p>
+        <p>Добавим функции для сохранения и загрузки баланса.</p>
+        <pre><code class="lang-python">
+import random
+import os
+# Возможные символы
+symbols = ["🍒", "🔔", "🍋", "⭐", "🍇"]
+
+# Функция для генерации случайных символов
+def spin():
+    return random.choice(symbols), random.choice(symbols), random.choice(symbols)
+
+# Функция для проверки выигрыша с учетом разных выплат
+def check_win(symbol1, symbol2, symbol3):
+    if symbol1 == symbol2 == symbol3:
+        if symbol1 == "🍒":
+            return "Вы выиграли 5x ставку!", 5
+        elif symbol1 == "🔔":
+            return "Вы выиграли 3x ставку!", 3
+        else:
+            return "Вы выиграли 2x ставку!", 2
+    else:
+        return "Попробуйте еще раз.", 0
+def load_balance(filename="balance.txt"):
+    if os.path.exists(filename):
+        with open(filename, "r") as file:
+            return int(file.read())
+    else:
+        return 100  # Если файла нет, начальный баланс по умолчанию
+
+# Функция для записи результатов игры в файл
+def save_balance(balance, filename="balance.txt"):
+    with open(filename, "w") as file:
+        file.write(f"{balance}")
+        </code></pre>
+    </div>
+</div>
+
+<div class="main supporting" id="game_logic" role="main">
+    <div class="participation" id="game-logic-participation" role="article">
+        <h3>Задание 1: Основной игровой цикл с системой ставок</h3>
+        <p>Теперь давайте добавим основной игровой цикл, в котором игрок будет делать ставки и вращать барабаны, пока у него есть деньги. Каждый раз после вращения мы будем обновлять баланс игрока в зависимости от результата.</p>
+        <pre><code class="lang-python">
+# Основной игровой цикл
+def main_game():
+    balance = load_balance()  # Начальный баланс игрока
+    print(f"Добро пожаловать в игру! Ваш начальный баланс: {balance} монет.")
+
+    while balance > 0:  # Игра продолжается, пока у игрока есть деньги
+        print(f"Ваш текущий баланс: {balance} монет.")
+        try:
+            bet = int(input("Введите вашу ставку (или 'q' для выхода): "))
+            if bet > balance:
+                print("Недостаточно средств для этой ставки!")
+                continue
+            if bet <= 0:
+                print("Ставка должна быть положительным числом.")
+                continue
+        except ValueError:
+            print("Жаль, что уже уходите.")
+            save_balance(balance)
+            break
+
+        # Вращение барабанов
+        symbols = spin()
+        print("Результаты вращения:", symbols)
+
+        # Проверяем выигрыш и обновляем баланс
+        message, multiplier = check_win(symbols[0], symbols[1], symbols[2])
+        print(message)
+        if multiplier > 0:
+            winnings = bet * multiplier
+            balance += winnings
+            print(f"Вы выиграли {winnings} монет!")
+        else:
+            balance -= bet
+            print(f"Вы проиграли {bet} монет.")
+
+        # Записываем результат в файл
+        save_balance(balance)
+
+        # Проверка, есть ли ещё деньги для продолжения игры
+        if balance <= 0:
+            print("Ваш баланс опустошен. Игра окончена.")
+            break
+
+    print("Спасибо за игру!")
+
+main_game()
+        </code></pre>
+    </div>
+</div>
+
+<div class="main supporting" id="game_logic_expansion" role="main">
+    <div class="explanation" id="game-expansion-explanation" role="article">
+        <h3>2.4 Добавление разных коэффициентов выигрыша</h3>
+        <p>Мы добавили возможность получения разного выигрыша в зависимости от символов. Например, если выпадают три 🍒, ставка увеличивается в 5 раз. Если три 🔔 – ставка умножается на 3. Остальные символы дают удвоение ставки.</p>
+        <p>Вы можете расширить игру, добавив больше символов и больше выигрышных комбинаций с различными коэффициентами выплат.</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block design_selection %}
+<div class="design-selection" id="design-selection">
+    <h3 class="select">Оглавление:</h3>
+    <nav role="navigation">
+        <ul>
+            <li><a href="#slot_machine" class="design-name">1. Создание "Однорукого бандита"</a></li>
+            <li><a href="#game_description" class="designer-name">2. Описание игры со ставками</a></li>
+            <li><a href="#game_logic" class="designer-name">3. Основной игровой цикл</a></li>
+            <li><a href="#game_logic_expansion" class="designer-name">4. Коэффициенты выигрыша</a></li>
+        </ul>
+    </nav>
+</div>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
+
+{% block aside %}
+    {{ super() }}
+{% endblock %}

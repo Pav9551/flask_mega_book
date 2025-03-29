@@ -1,0 +1,122 @@
+{% extends "lua_intensiv/base_zen_garden.html" %}
+{% block title %}template{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block body %}
+{{ super() }}
+{% endblock %}
+{% block preamble %}
+		<div class="preamble" id="environment" role="article">
+			<h3>16. Создаем кликер.</h3>
+			<p>Создайте элементы пользовательского интерфейса согласнно рисунку 3:</p>
+			<figure>
+			<img src="/static/roblox_clicker.png" alt="Trulli" style="width:100%">
+  			<figcaption>Рис.3 - Элементы пользовательского интерфейса GUI.</figcaption>
+			</figure>
+			<h3>16.1 Скрипт на сервере.</h3>
+
+			<pre><code class="lang-js">
+game.Players.PlayerAdded:Connect(function(plr)
+	print("0K")
+	local CashStats = Instance.new("Folder",plr)
+	CashStats.Name = "CashStats"
+	local cash = Instance.new("NumberValue",CashStats)
+	cash.Name = 'Cash'
+	cash.Value = 500
+	local answer = Instance.new("NumberValue",CashStats)
+	answer.Name = 'answer'
+	answer.Value = 10000
+	local time = Instance.new("NumberValue",CashStats)
+	answer.Name = 'time'
+	answer.Value = 100
+end)
+
+game.ReplicatedStorage.RemoteEventAnswer.OnServerEvent:Connect(function(plr)
+	plr.CashStats.Cash.Value = plr.CashStats.Cash.Value + 100
+end)
+
+			</code></pre>
+		<p>Обратите внимание, что тип скрипта - серверный, все другие будут выполняться на клиенте.</p>
+		</div>
+{% endblock %}
+{% block main_supporting %}
+	<div class="main supporting" id="introduction" role="main">
+		<div class="explanation" id="moving" role="article">
+			<h3>17.1 Создаем локальные скрипты.</h3>
+
+			<pre><code class="lang-js">
+-- Создание события по клику на кнопке
+script.Parent.Size = UDim2.new(0.05, 0, 0.10, 0)
+script.Parent.MouseButton1Click:Connect(function()
+	local newPositionX = math.random(0, 80) / 100
+	local newPositionY = math.random(0, 80) / 100
+	script.Parent.Position = UDim2.new(newPositionX, 0, newPositionY, 0)
+	game.ReplicatedStorage.RemoteEventAnswer:FireServer()
+
+end)
+			</code></pre>
+		</div>
+		<div class="participation" id="zen-participation" role="article">
+			<h3>17.2 Создаем скрипт обновления времени.</h3>
+			<pre><code class="lang-js">
+--обновляем время
+while wait(0.1) do
+	script.Parent.Text = game.Players.LocalPlayer.CashStats.time.Value
+	game.Players.LocalPlayer.CashStats.time.Value = game.Players.LocalPlayer.CashStats.time.Value - 5
+	if game.Players.LocalPlayer.CashStats.time.Value <= 0 then
+		local newPositionX = math.random(0, 80) / 100
+		local newPositionY = math.random(0, 80) / 100
+		script.Parent.Position = UDim2.new(newPositionX, 0, newPositionY, 0)
+		game.Players.LocalPlayer.CashStats.time.Value = 100
+	end
+end
+			</code></pre>
+			<h3>17.3 Создаем кнопку закрытия окна</h3>
+
+			<pre><code class="lang-js">
+--создаем кнопку закрытия окна
+local plr = game.Players.LocalPlayer
+
+script.Parent.MouseButton1Click:Connect(function()
+	plr.PlayerGui.ScreenGui_osu.Frame_osu.Visible = false
+	plr.PlayerGui.ScreenGui_menu.Enabled = true
+	plr.PlayerGui.ShopGui.Enabled = true
+end)
+			</code></pre>
+		</div>
+		<div class="participation" id="zen-participation" role="article">
+			<h3>17.4 Создаем скрипт обновления очков.</h3>
+			<pre><code class="lang-js">
+--обновление очков
+while wait(0.01) do
+	script.Parent.Text = game.Players.LocalPlayer.CashStats.Cash.Value.." $"
+end
+			</code></pre>
+		</div>
+	</div>
+{% endblock %}
+{% block design_selection %}
+			<div class="design-selection" id="design-selection">
+				<h3 class="select">День шестой:</h3>
+				<nav role="navigation">
+					<ul>
+											<li>
+						<a href="#environment" class="design-name" >13. -.</a>
+					</li>					<li>
+						<a href="#moving" class="designer-name">14. -.</a>
+					</li>					<li>
+						<a href="#zen-participation" class="design-name">15. -.</a>
+					</li>
+					</ul>
+				</nav>
+			</div>
+
+{% endblock %}
+{% block footer %}
+
+{% endblock %}
+{% block aside %}
+{{ super() }}
+{% endblock %}
+

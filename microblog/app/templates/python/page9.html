@@ -1,0 +1,151 @@
+{% extends "python/base_zen_garden.html" %}
+
+{% block title %}
+Занятие по Python – Простое тестирование с использованием unittest
+{% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+{% endblock %}
+
+{% block preamble %}
+<div class="preamble" id="unittest_intro" role="article">
+    <h3>1. Введение в простое тестирование</h3>
+    <p>Сегодня мы изучим, как использовать простые утверждения для тестирования функций в Python. Это поможет вам убедиться, что ваш код работает правильно, без необходимости использования классов.</p>
+</div>
+{% endblock %}
+
+{% block main_supporting %}
+<div class="main supporting" id="unittest_description" role="main">
+    <div class="explanation" id="unittest-explanation" role="article">
+        <h3>2.1 Описание простого тестирования</h3>
+        <p>Мы будем использовать простые функции и утверждения для проверки корректности работы вашего кода.</p>
+    </div>
+
+    <div class="participation" id="unittest-setup" role="article">
+        <h3>Шаг 2: Создание функций для тестирпования</h3>
+        <p>Создайте функции для тестирования в отдельном файле calculator.py.</p>
+        <pre><code class="lang-python">
+def add(a, b):
+    return a + b
+
+def subtract(a, b):
+    return a - b
+        </code></pre>
+        <p>Эти функции интуитивно понятны. Здесь разделители играют важную роль.</p>
+    </div>
+    <div class="participation" id="unittest-setup" role="article">
+        <h3>Шаг 1: Импорт необходимых функций</h3>
+        <p>Для начала, нам нужно импортировать функции, которые мы будем тестировать.</p>
+        <pre><code class="lang-python">
+from calculator import add, subtract
+        </code></pre>
+        <p>Эти функции будут протестированы с помощью простых утверждений.</p>
+    </div>
+    <div class="participation" id="unittest-setup" role="article">
+        <h3>Шаг 3: Подключение модуля для тестирования</h3>
+        <p>unittest` — это стандартный модуль в Python, предоставляющий инструменты для организации и выполнения автоматических тестов кода. Он позволяет разработчикам создавать тесты, которые могут использоваться для проверки правильности и надежности своих программ. `unittest` основан на концепции тестирования с помощью классов и методов, но предоставляет гибкий интерфейс для написания и выполнения тестов</p>
+        <pre><code class="lang-python">
+import unittest
+        </code></pre>
+        <p>Если все утверждения истинны, будет выведено сообщение об успешном прохождении тестов.</p>
+    </div>
+</div>
+
+<div class="main supporting" id="example_file" role="main">
+    <div class="explanation" id="example-file-explanation" role="article">
+        <h3>Пример тестового файла</h3>
+        <p>Файл <code>test_calculator.py</code> может содержать тесты, как показано ниже:</p>
+        <pre><code class="lang-python">
+from calculator import add, subtract
+
+import unittest
+assert add(2, 3) == 5, "2 + 3 должно быть равно 5"
+assert add(-1, 1) == 0, "-1 + 1 должно быть равно 0"
+assert add(0, 10) == 0, "0 + 0 должно быть равно 0"
+
+assert subtract(5, 3) == 2, "5 - 3 должно быть равно 2"
+assert subtract(0, 0) == 0, "0 - 0 должно быть равно 0"
+assert subtract(10, -5) == 15, "10 - (-5) должно быть равно 15"
+
+print("Все тесты прошли успешно!")
+        </code></pre>
+        <p>Этот файл можно запускать напрямую для выполнения тестов.</p>
+    </div>
+</div>
+
+<div class="main supporting" id="execution_logic" role="main">
+    <div class="participation" id="execution-example" role="article">
+        <h3>Задание 1: Основная логика выполнения</h3>
+        <p>Запуск тестов позволяет убедиться, что ваш код работает правильно и помогает быстро находить ошибки при изменениях.</p>
+    </div>
+</div>
+
+<div class="main supporting" id="expansion" role="main">
+    <div class="explanation" id="expansion-explanation" role="article">
+        <h3>3. Возможности расширения</h3>
+        <p>Проверим как работает наша функция, которая загружает карту.</p>
+        <pre><code class="lang-python">
+from calculator import add, subtract
+import unittest
+
+# ... existing test code ...
+
+def load_maps_from_file(filename):
+    maps = []
+    current_map = []
+    with open(filename, 'r', encoding='utf-8') as file:
+        for line in file:
+            line = line.strip()  # Удаляем пробелы и символ новой строки
+            if len(line) == 0 and current_map:
+                maps.append(current_map)
+                current_map = []
+            elif line:
+                current_map.append(line)
+        if current_map:
+            maps.append(current_map)
+    return maps
+
+# Тестирование функции load_maps_from_file без использования классов
+# Создаем временный файл для тестирования
+with open('test_map.txt', 'w', encoding='utf-8') as f:
+    f.write("line1\nline2\n\nline3\nline4\n")
+
+# Ожидаемый результат
+output = [['line1', 'line2'], ['line3', 'line4']]
+
+# Вызов функции и проверка
+result = load_maps_from_file('test_map.txt')
+assert result == output, "Функция должна корректно загружать карты из файла"
+
+print("Все тесты прошли успешно!")
+        </code></pre>
+    </div>
+</div>
+{% endblock %}
+
+{% block design_selection %}
+<div class="design-selection" id="design-selection">
+    <h3 class="select">Оглавление:</h3>
+    <nav role="navigation">
+        <ul>
+            <li><a href="#unittest_intro" class="design-name">1. Введение в простое тестирование</a></li>
+            <li><a href="#unittest_description" class="designer-name">2. Описание простого тестирования</a></li>
+            <li><a href="#example_file" class="designer-name">3. Пример тестового файла</a></li>
+            <li><a href="#execution_logic" class="designer-name">4. Основная логика выполнения</a></li>
+            <li><a href="#expansion" class="designer-name">5. Возможности расширения</a></li>
+        </ul>
+    </nav>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block aside %}
+{{ super() }}
+{% endblock %}

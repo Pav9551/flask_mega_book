@@ -1,0 +1,243 @@
+{% extends "base_zen_garden.html" %}
+{% block title %}template{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block body %}
+{{ super() }}
+{% endblock %}
+{% block preamble %}
+		<div class="preamble" id="environment" role="article">
+			<h3>7. Операторы сравнения и поток управления</h3>
+			<h3>Таблица 5. Операторы сравнения в Lua</h3>
+			<table>
+			  <tr>
+				<th>Оп.</th>
+				<th>Значение</th>
+				<th>Пример кода</th>
+			  </tr>
+			  <tr>
+				<td>==</td>
+				<td>Равно</td>
+				<td><code>a == b -- true, если a равно b</code></td>
+			  </tr>
+			  <tr>
+				<td>~=</td>
+				<td>Не равно</td>
+				<td><code>a ~= b -- true, если a не равно b</code></td>
+			  </tr>
+			  <tr>
+				<td><</td>
+				<td>Меньше</td>
+				<td><code>a < b -- true, если a меньше b</code></td>
+			  </tr>
+			  <tr>
+				<td>></td>
+				<td>Больше</td>
+				<td><code>a > b -- true, если a больше b</code></td>
+			  </tr>
+			  <tr>
+				<td><=</td>
+				<td>Меньше или равно</td>
+				<td><code>a <= b -- true, если a меньше или равно b</code></td>
+			  </tr>
+			  <tr>
+				<td>>=</td>
+				<td>Больше или равно</td>
+				<td><code>a >= b -- true, если a больше или равно b</code></td>
+			  </tr>
+			</table>
+			<h3>Таблица 6. Таблица истинности для "И" (and) логическое умножение</h3>
+			<table>
+			  <tr>
+				<th>A</th>
+				<th>B</th>
+				<th>A and B</th>
+			  </tr>
+			  <tr>
+				<td>true</td>
+				<td>true</td>
+				<td>true</td>
+			  </tr>
+			  <tr>
+				<td>true</td>
+				<td>false</td>
+				<td>false</td>
+			  </tr>
+			  <tr>
+				<td>false</td>
+				<td>true</td>
+				<td>false</td>
+			  </tr>
+			  <tr>
+				<td>false</td>
+				<td>false</td>
+				<td>false</td>
+			  </tr>
+			</table>
+
+			<br>
+
+			<h3>Таблица 7. Таблица истинности для "ИЛИ" (or) логическое сложение</h3>
+			<table>
+			  <tr>
+				<th>A</th>
+				<th>B</th>
+				<th>A or B</th>
+			  </tr>
+			  <tr>
+				<td>true</td>
+				<td>true</td>
+				<td>true</td>
+			  </tr>
+			  <tr>
+				<td>true</td>
+				<td>false</td>
+				<td>true</td>
+			  </tr>
+			  <tr>
+				<td>false</td>
+				<td>true</td>
+				<td>true</td>
+			  </tr>
+			  <tr>
+				<td>false</td>
+				<td>false</td>
+				<td>false</td>
+			  </tr>
+			</table>
+			<h3>Ветвления в Lua - if then end и примеры использования операторов сравнения:</h3>
+			<pre><code class="lang-js">
+-- Проверка на равенство
+if 10 == 10 then
+  print("10 равно 10")
+end
+
+-- Проверка на неравенство
+if "hello" ~= "world" then
+  print("hello не равно world")
+end
+			</code></pre>
+			<h3>Циклы в Lua - while и примеры использования операторов сравнения:</h3>
+			<pre><code class="lang-js">
+-- Цикл while, который выводит числа от 1 до 5
+local i = 1
+while i <= 5 do
+  print(i)
+  i = i + 1
+end
+			</code></pre>
+			<h3>Циклы в Lua - for do end:</h3>
+			<pre><code class="lang-js">
+-- Цикл, который выводит элементы таблицы
+local myTable = { "apple", "banana", "cherry" }
+for i, v in ipairs(myTable) do
+  print(i, v)
+end
+			</code></pre>
+
+		</div>
+{% endblock %}
+{% block main_supporting %}
+	<div class="main supporting" id="introduction" role="main">
+		<div class="explanation" id="moving" role="article">
+			<h3>8. Создание матрицы разноцветных блоков и вложенные циклы</h3>
+			<p>Для того, чтобы создать матрицы разноцветных блоков необходимо создать новый объект Script в службе ServerScriptService. Кнопка "+" в окне Explorer справа от службы, поменять имя объекта на Script_blocks (свойство Name)
+			и добавить строчки кода:</p>
+
+			<pre><code class="lang-js">
+-- Создание папки для хранения блоков
+local partsFolder = Instance.new("Folder")
+partsFolder.Name = "Parts"
+partsFolder.Parent = workspace
+
+-- Параметры матрицы
+local rows = 10
+local cols = 10
+local spacing = 10 -- расстояние между частями
+-- Создание матрицы частей
+for i = 1, rows do
+	for j = 1, cols do
+		local part = Instance.new("Part")
+		part.Size = Vector3.new(4, 1, 4) -- размер части
+		part.Position = Vector3.new(10, 0, 10) + Vector3.new((j - 1) * (part.Size.X + spacing), spacing, (i - 1) * (part.Size.Z + spacing)) -- позиция части
+		part.Anchored = true -- зафиксировать часть на месте
+		part.Parent = game.Workspace.Parts -- добавить часть в игровое пространство
+		part.BrickColor = BrickColor.Random() -- случайный цвет части
+	end
+end
+
+			</code></pre>
+	</div>
+	<p>Запустите игру и убедитесь, что сто блоков висит в воздухе. Если не зафиксировать блоки поменяв свойство part.Anchored = false, то блоки упадут на землю.</p>
+
+		<div class="participation" id="zen-participation" role="article">
+			<h3>9 Кланируем паука по матрице разноцветных блоков</h3>
+			<p>Добавьте модель Enemy Spider из Toolbox на наше рабочее пространство(Workspace) и переместите его в службу ReplicatedStorage меняя свойство Parent:</p>
+			<p>Обновите строчки кода:</p>
+			<pre><code class="lang-js">
+-- Создание папки для хранения блоков
+local partsFolder = Instance.new("Folder")
+partsFolder.Name = "Parts"
+partsFolder.Parent = workspace
+
+-- Параметры матрицы
+local rows = 10
+local cols = 10
+local spacing = 10 -- расстояние между частями
+-- Создание матрицы частей
+for i = 1, rows do
+	for j = 1, cols do
+		local part = Instance.new("Part")
+		part.Size = Vector3.new(4, 1, 4) -- размер части
+		part.Position = Vector3.new(10, 0, 10) + Vector3.new((j - 1) * (part.Size.X + spacing), spacing, (i - 1) * (part.Size.Z + spacing)) -- позиция части
+		part.Anchored = true -- зафиксировать часть на месте
+		part.Parent = game.Workspace.Parts -- добавить часть в игровое пространство
+		part.BrickColor = BrickColor.Random() -- случайный цвет части
+	end
+end
+-- Создание папки для хранения пауков
+local partsFolderSpider = Instance.new("Folder")
+partsFolderSpider.Name = "Spider"
+partsFolderSpider.Parent = workspace
+
+local spawns = partsFolder--это папка с блоками
+local spawn_time = 5 --период через который появляются новые пауки в секундах
+while true do --до тех пор пока 1==1? - всегда повторяться
+	wait(spawn_time) -- ждём указанное время
+	for _, spwn in pairs(spawns:GetChildren()) do --перебор пар из списка объектов внутри папки с блоками
+		if spwn:IsA('BasePart') then --является ли этот элемент потомком BasePart?
+			local Spider = game.ReplicatedStorage['Enemy Spider']:Clone()
+			Spider.Parent = partsFolderSpider -- помещаем его в Workspace (появляется на карте)
+			Spider.Torso.CFrame = CFrame.new(spwn.Position + Vector3.new(0,3,0))
+		end
+	end
+end
+			</code></pre>
+		</div>
+			<p>Вы можете эсперементировать с кодом меняя параметры матрицы и время клонирования пауков.</p>
+		</div>
+{% endblock %}
+{% block design_selection %}
+			<div class="design-selection" id="design-selection">
+				<h3 class="select">День третий:</h3>
+				<nav role="navigation">
+					<ul>
+											<li>
+						<a href="#environment" class="design-name" >7. Операторы сравнения и поток управления</a>
+					</li>					<li>
+						<a href="#moving" class="designer-name">8. Создание матрицы разноцветных блоков</a>
+					</li>					<li>
+						<a href="#zen-participation" class="design-name">9 Кланируем паука по матрице разноцветных блоков</a>
+					</li>
+					</ul>
+				</nav>
+			</div>
+{% endblock %}
+{% block footer %}
+
+{% endblock %}
+{% block aside %}
+{{ super() }}
+{% endblock %}
+

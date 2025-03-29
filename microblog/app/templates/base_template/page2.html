@@ -1,0 +1,183 @@
+{% extends "base_zen_garden.html" %}
+{% block title %}template{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block body %}
+{{ super() }}
+{% endblock %}
+{% block preamble %}
+		<div class="preamble" id="environment" role="article">
+			<h3>4. Объекты моделирования физики</h3>
+			<p>В Roblox Studio доступны объекты моделирования физики:</p>
+			<p>AlignPosition(Выравнивание позиции) - это компонент, который позволяет выравнивать позицию одного объекта (дочернего) относительно другого (родительского), тем самым создает движение объекта;</p>
+			<p>AlignOrienation(Выравнивание ориентации) - это компонент, который позволяет выравнивать ориентацию (поворот) одного объекта (дочернего) относительно другого (родительского), тем самым стабилизирует положение объекта и не дает ему перевернуться;</p>
+			<p>Аttachment(Присоединение) - наличие этого объекта, есть необходимое требование для работы AlignPosition и AlignOrienation.</p>
+			<p>Применение этих объектов позволяет нам создать двигающуюся платформу на базе объекта класса Part. Физические свойства класса Part приведены в таблице</p>
+			<h3>Таблица 2. Физические свойства класса Part</h3>
+		<table>
+		  <thead>
+			<tr>
+			  <th>Свойство</th>
+			  <th>Описание</th>
+			  <th>Значение</th>
+			</tr>
+		  </thead>
+		  <tbody>
+		  	<tr>
+			  <td>Anchored</td>
+			  <td>Фиксирует объект в пространстве, не позволяя ему двигаться.</td>
+			  <td>Логическое значение (true/false).</td>
+			</tr>
+			<tr>
+			  <td>Mass</td>
+			  <td>Масса объекта.</td>
+			  <td>Числовое значение, измеряемое в килограммах (kg).</td>
+			</tr>
+			<tr>
+			  <td>Friction</td>
+			  <td>Коэффициент трения, определяющий, как объект будет двигаться по поверхности.</td>
+			  <td>Числовое значение от 0 до 1. Чем выше значение, тем больше трение.</td>
+			</tr>
+			<tr>
+			  <td>Elasticity</td>
+			  <td>Коэффициент упругости, определяющий, насколько объект будет отскакивать от других объектов.</td>
+			  <td>Числовое значение от 0 до 1. Чем выше значение, тем больше упругость.</td>
+			</tr>
+			<tr>
+			  <td>CanCollide</td>
+			  <td>Включает или отключает возможность столкновения с другими объектами.</td>
+			  <td>Логическое значение (true/false).</td>
+			</tr>
+		  </tbody>
+		</table>
+		</div>
+{% endblock %}
+{% block main_supporting %}
+	<div class="main supporting" id="introduction" role="main">
+		<div class="explanation" id="moving" role="article">
+			<h3>5 Создание движущейся платформы</h3>
+			<p>Для того, чтобы заставить объект Part (принадлежащий workspace) двигаться, необходимо создать новый объект Script в службе ServerScriptService. Кнопка "+" в окне Explorer справа от службы, поменять имя объекта на Script_move (свойство Name)
+			и добавить строчки кода:</p>
+
+			<pre><code class="lang-js">
+local part = game.Workspace.Part
+-- направление в точку A
+local fromPosition = part.Position + Vector3.new(-100, 3 , 5)
+-- направление в точку B
+local toPosition = part.Position + Vector3.new(30, 3 , 5)
+
+local alignPosition = Instance.new("AlignPosition", part)
+local attachment = Instance.new("Attachment", part)
+
+--Enum - это стандартный тип, который предоставляет множество предустановленных перечислений
+alignPosition.Mode = Enum.PositionAlignmentMode.OneAttachment
+--ссылка на присоединение
+alignPosition.Attachment0 = attachment
+alignPosition.MaxVelocity = 15
+alignPosition.MaxForce = 10000000
+
+local alignOrienation = Instance.new("AlignOrientation", part)
+--Enum - для лучшей читабельности
+alignOrienation.Mode = Enum.OrientationAlignmentMode.OneAttachment
+--ссылка на присоединение
+alignOrienation.Attachment0 = attachment
+alignOrienation.MaxTorque = 10000000
+
+while true do
+	part.AlignPosition.Position = fromPosition
+	task.wait(5)
+	part.AlignPosition.Position = toPosition
+	task.wait(5)
+end
+
+			</code></pre>
+
+	</div>
+	<p>Запустите игру, Вы можете не только наблюдать за движением платформы, но и кататься на ней.</p>
+
+		<div class="participation" id="zen-participation" role="article">
+			<h3>6 Создание объектов AlignPosition, AlignOrientation и Attachment вручную</h3>
+			<p>Создайте новый объект Part в службе workspace и дайте ему имя Part_one. Кнопкой "+" в окне Explorer справа от объекта Part_one добвьте новые объекты AlignPosition, AlignOrientation и Attachment и поменяйте их свойства в соответствии с таблицами свойств:</p>
+		</div>
+
+		<div class="benefits" id="moving1" role="article">
+			<h3>Таблица 3. Align Position Properties</h3>
+		<table>
+		  <tr>
+			<th>Свойство</th>
+			<th>Значение</th>
+			<th>Примечание</th>
+		  </tr>
+		  <tr>
+			<td>Mode</td>
+			<td>OneAttachment</td>
+			<td>В режиме одного присоединения</td>
+		  </tr>
+		  <tr>
+			<td>Attachment0</td>
+			<td>attachment</td>
+			<td>ссылаемся на данное присоединение</td>
+		  </tr>
+		  <tr>
+			<td>MaxVelocity</td>
+			<td>15</td>
+			<td>Скорость</td>
+		  </tr>
+		  <tr>
+			<td>MaxForce</td>
+			<td>10000000</td>
+			<td>Сила</td>
+		  </tr>
+		</table>
+		<h3>Таблица 4. Align Orientation Properties</h3>
+		<table>
+		  <tr>
+			<th>Свойство</th>
+			<th>Значение</th>
+			<th>Примечание</th>
+		  </tr>
+		  <tr>
+			<td>Mode</td>
+			<td>OneAttachment</td>
+			<td>В режиме одного присоединения</td>
+		  </tr>
+		  <tr>
+			<td>Attachment0</td>
+			<td>attachment</td>
+			<td>ссылаемся на данное присоединение</td>
+		  </tr>
+		  <tr>
+			<td>MaxTorque</td>
+			<td>10000000</td>
+			<td>Крутящий момент</td>
+		  </tr>
+		</table>
+		<p>Вы можете задать место назначения движущейся платформе меняя свойство объекта Align Position - Position (координата x, y, z).</p>
+		</div>
+		</div>
+{% endblock %}
+{% block design_selection %}
+			<div class="design-selection" id="design-selection">
+				<h3 class="select">День второй:</h3>
+				<nav role="navigation">
+					<ul>
+											<li>
+						<a href="#environment" class="design-name" >4. Объекты моделирования физики</a>
+					</li>					<li>
+						<a href="#moving" class="designer-name">5. Создание движущейся платформы</a>
+					</li>					<li>
+						<a href="#zen-participation" class="design-name">6 Создание объектов AlignPosition, AlignOrientation и Attachment вручную</a>
+					</li>
+					</ul>
+				</nav>
+			</div>
+
+{% endblock %}
+{% block footer %}
+
+{% endblock %}
+{% block aside %}
+{{ super() }}
+{% endblock %}
+
